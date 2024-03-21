@@ -1,0 +1,61 @@
+
+<table id="scraList" class="table table-bordered text-center" style="width:100%">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Loan Type</th>
+            <th>Open state</th>
+            <th>Loan Type</th>
+            <th>Acc status</th>
+            <th>Date request</th>
+            <th>Method notification</th>
+            <th>Date open acc</th>
+            <th>Military Date</th>
+            <th>Does qualify?</th>
+            <th>Status note</th>
+            <th>Name</th>
+            <th>Loan Type</th>
+            <th>Open state</th>
+            <th>Loan Type</th>
+            <th>Acc status</th>
+            <th>Date request</th>
+            <th>Method notification</th>
+            <th>Date open acc</th>
+            <th>Military Date</th>
+            <th>Does qualify?</th>
+            <th>Status note</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for customer in customers %}
+            <td class="text-start">{{ forloop.counter }}</td>
+            <td class="text-start">{{customer.customer_name}}</td>
+            <td class="text-start">{{customer.open_state}}</td>
+            <td class="text-start">{{customer.loan_type}}</td>
+            <td class="text-start">{{customer.loan_type}}</td>
+            <td class="text-start">{{customer.acc_status}}</td>
+            <td class="text-start">{{customer.date_request}}</td>           
+            <td class="text-start">{{customer.method_notification}}</td>           
+            <td class="text-start">{{customer.date_open_acc}}</td>           
+            <td class="text-start">{{customer.military_date}}</td>           
+            <td class="text-start">{{customer.qualify}}</td>           
+            <td class="text-start">{{customer.status_notes}}</td>           
+            <td class="text-start">{{customer.customer_name}}</td>
+            <td class="text-start">{{customer.open_state}}</td>
+            <td class="text-start">{{customer.loan_type}}</td>
+            <td class="text-start">{{customer.loan_type}}</td>
+            <td class="text-start">{{customer.acc_status}}</td>
+            <td class="text-start">{{customer.date_request}}</td>           
+            <td class="text-start">{{customer.method_notification}}</td>           
+            <td class="text-start">{{customer.date_open_acc}}</td>           
+            <td class="text-start">{{customer.military_date}}</td>           
+            <td class="text-start">{{customer.qualify}}</td>           
+            <td class="text-start">{{customer.status_notes}}</td>           
+            {% endfor %}
+        </tr>
+    </tbody>
+
+</table>

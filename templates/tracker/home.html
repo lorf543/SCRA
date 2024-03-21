@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+<div class="wrapper">
+
+    {% include "layout/sidebar.html" %}
+
+
+    <div class="main p-3 bg-dark">
+            
+        <div class="text-center pt-5">
+            <h2 class="text-white">SCRA list</h2>
+
+            <div class="shadow p-3 rounded-3 bg-light">
+                {% include "layout/table.html" %}
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}
+
