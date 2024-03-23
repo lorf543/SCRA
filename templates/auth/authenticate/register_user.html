@@ -31,7 +31,8 @@
                     <p class="text-white-50 mb-5">Please enter your login and password!</p>
                 <form action="{% url 'register_user' %}" method="POST">
                   {% csrf_token %}
-                        {{form.username|as_crispy_field}}
+                        <div class="pb-1">{{form.username|as_crispy_field}}</div>
+                        <div id="username_error" class="pb-3"></div>
                         {{form.password1|as_crispy_field}}
                         {{form.password2|as_crispy_field}}
                       
@@ -42,6 +43,7 @@
                     <p class="mb-0 pt-3">Alerady have an Account? <a href="{% url 'login_user' %}" class="text-white-50 fw-bold">Sign In</a>
                     </p>
                   </div>
+                  
       
                 </div>
               </div>

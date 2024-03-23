@@ -11,10 +11,11 @@
 
     <div class="main p-3 bg-dark">
             
-        <div class="text-center pt-5">
+        <div class="pt-5">
             <h2 class="text-white">SCRA list</h2>
 
             <div class="shadow p-3 rounded-3 bg-light">
+                <a href="{% url 'add_customer' %}" class="btn btn-success">New entry</a>
                 {% include "layout/table.html" %}
             </div>
 

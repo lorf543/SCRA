@@ -1,7 +1,8 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth import authenticate, login, logout
 from django.views.decorators.cache import cache_control, never_cache
 from django.contrib import messages
+from django.contrib.auth import get_user_model
 
 
 from .forms import UserCreateForm
@@ -60,3 +61,13 @@ def log_out(request):
     logout(request)
     messages.success(request, 'You were logout')
     return redirect('login_user')
+
+
+#________________HTMX__________________
+
+def check_username(request):
+    username = request.POST.get('username')
+    if get_user_model().objects.filter(username=username).exists():
+        return HttpResponse("<div class='text-danger bolder'>This username Already exist.</div>")
+    else:
+        return HttpResponse("<div class='text-success bolder'>This username is available.</div>")
