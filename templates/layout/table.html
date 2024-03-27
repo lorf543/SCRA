@@ -1,61 +1,71 @@
-
-<table id="scraList" class="table table-bordered text-center" style="width:100%">
-    <thead>
-        <tr>
-            <th>#</th>
-            <th>Name</th>
-            <th>Loan Type</th>
-            <th>Open state</th>
-            <th>Loan Type</th>
-            <th>Acc status</th>
-            <th>Date request</th>
-            <th>Method notification</th>
-            <th>Date open acc</th>
-            <th>Military Date</th>
-            <th>Does qualify?</th>
-            <th>Status note</th>
-            <th>Name</th>
-            <th>Loan Type</th>
-            <th>Open state</th>
-            <th>Loan Type</th>
-            <th>Acc status</th>
-            <th>Date request</th>
-            <th>Method notification</th>
-            <th>Date open acc</th>
-            <th>Military Date</th>
-            <th>Does qualify?</th>
-            <th>Status note</th>
-
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            {% for customer in customers %}
-            <td class="text-start">{{ forloop.counter }}</td>
-            <td class="text-start">{{customer.customer_name}}</td>
-            <td class="text-start">{{customer.open_state}}</td>
-            <td class="text-start">{{customer.loan_type}}</td>
-            <td class="text-start">{{customer.loan_type}}</td>
-            <td class="text-start">{{customer.acc_status}}</td>
-            <td class="text-start">{{customer.date_request}}</td>           
-            <td class="text-start">{{customer.method_notification}}</td>           
-            <td class="text-start">{{customer.date_open_acc}}</td>           
-            <td class="text-start">{{customer.military_date}}</td>           
-            <td class="text-start">{{customer.qualify}}</td>           
-            <td class="text-start">{{customer.status_notes}}</td>           
-            <td class="text-start">{{customer.customer_name}}</td>
-            <td class="text-start">{{customer.open_state}}</td>
-            <td class="text-start">{{customer.loan_type}}</td>
-            <td class="text-start">{{customer.loan_type}}</td>
-            <td class="text-start">{{customer.acc_status}}</td>
-            <td class="text-start">{{customer.date_request}}</td>           
-            <td class="text-start">{{customer.method_notification}}</td>           
-            <td class="text-start">{{customer.date_open_acc}}</td>           
-            <td class="text-start">{{customer.military_date}}</td>           
-            <td class="text-start">{{customer.qualify}}</td>           
-            <td class="text-start">{{customer.status_notes}}</td>           
-            {% endfor %}
-        </tr>
-    </tbody>
-
+<table id="scraList" class="table table-bordered text-center">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Name</th>
+      <th>Loan Type</th>
+      <th>Open state</th>
+      <th>Loan Type</th>
+      <th>Acc status</th>
+      <th>Date request</th>
+      <th>Method notification</th>
+      <th>Date open acc</th>
+      <th>Military Date</th>
+      <th>Does qualify?</th>
+      <th class="text-center status">Status note</th>
+      <th>Amount refund</th>
+      <th>The way refund</th>
+      <th>Date refund</th>
+      <th>Where fees</th>
+      <th>Where waived</th>
+      <th>Waive interest</th>
+      <th>Approved by</th>
+      <th>First Review</th>
+      <th>Date More info letter</th>
+      <th class="bg-secondary">Alert Denial Date</th>
+      <th class="">Denial Date</th>
+      <th class="">Denial user</th>
+    </tr>
+  </thead>
+  <tbody class="text-center">
+    {% for customer in customers %}
+    <tr>
+      <td class="text-center">{{ forloop.counter }}</td>
+      <td class="text-center">
+        <a
+          class="btn btn-success btn-sm"
+          href="{% url 'list_customer' pk_customer=customer.id %}">
+          {{customer.customer_name}}
+          
+        </a>
+      </td>
+      <td class="text-center">{{customer.open_state}}</td>
+      <td class="text-center">{{customer.account_number}}</td>
+      <td class="text-center">{{customer.loan_type}}</td>
+      <td class="text-center">{{customer.acc_status}}</td>
+      <td class="text-center">{{customer.date_request|date:"m/d/Y"}}</td>
+      <td class="text-center">{{customer.method_notification}}</td>
+      <td class="text-center">{{customer.date_open_acc|date:"m/d/Y"}}</td>
+      <td class="text-center">{{customer.military_date|date:"m/d/Y"}}</td>
+      <td class="text-center">{{customer.qualify}}</td>
+      <td class=" status">{{customer.status_notes}}</td>
+      {% if  customer.amount_refund %}
+      <td class="text-center">{{customer.amount_refund}}</td>
+      {% else %}
+        <td>N/A</td>
+      {% endif %}
+      <td class="text-center">{{customer.the_way_refund}}</td>
+      <td class="text-center">{{customer.date_refund}}</td>
+      <td class="text-center">{{customer.where_fees}}</td>
+      <td class="text-center">{{customer.where_waived}}</td>
+      <td class="text-center">{{customer.waive_interest}}</td>
+      <td class="text-center">N/A</td>
+      <td class="text-center">{{customer.first_review|date:"m/d/Y"}}</td>
+      <td class="text-center">{{customer.date_mil|date:"m/d/Y"}}</td>
+      <td class="text-center bg-secondary">{{customer.date_alert_dl|date:"m/d/Y"}}</td>
+      <td class="text-center"></td>
+      <td class="text-center">ES</td>
+    </tr>
+    {% endfor %}
+  </tbody>
 </table>

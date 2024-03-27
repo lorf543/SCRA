@@ -4,8 +4,9 @@
 
 body {
   font-family: "Blinker", sans-serif;
-  background: var(--main-bg-color);
+
 }
+
 
 .alerady-add {
   background: rgba(242, 219, 13, 0.501);
@@ -202,9 +203,16 @@ table.dataTable th {
 
 td{
   min-width: 100px;
-
+}
+.status{
+  min-width: 250px;
+  text-align:left;
 }
 
+td:first-child{
+  min-width: 25px;
+  font-weight: bold;
+}
 
 .primary-text {
   color: var(--main-text-color);

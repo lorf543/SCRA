@@ -1,0 +1,128 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="wrapper vh-100">
+  {% include "layout/sidebar.html" %}
+
+
+
+  
+
+  <div class="container pt-5">
+     <a class="d-flex mb-2 align-items-center justify-content-center  btn btn-outline-secondary shadow btn-sm" style="width: 18rem;" href="/">
+          <i class="h1 lni lni-arrow-left-circle"></i>
+          <h3 class="px-3">Back to tracker</h3>
+     </a>
+    <div class="card shadow" style="width:850px;">
+     <div class="row mt-5">
+        <div class="d-flex justify-content-center align-items-center text-center">
+            <div class="row">
+                <h3 class="mt-1" >{{customer.customer_name}}</h3>
+                <h6 class="text-secondary">{{customer.account_number}}</h6>
+            </div>
+            <div class="row">
+                <h3>Adededd by</h3>
+                <h6 class="text-secondary" >Eduardo Sanchez</h6>
+            </div>
+            <div class="row">
+                <h3>Status</h3>
+                <h6 class="text-secondary">Mil</h6>
+            </div>
+        </div>
+     </div>
+     
+     <div class="container">
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+              <li class="nav-item" role="presentation">
+                <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab">Inicio</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab">Update</a>
+              </li>
+            </ul>
+           
+            <div class="tab-content" id="myTabContent">
+              <div class="tab-pane fade show active" id="home" role="tabpanel">
+                    <div class="container p-3">
+                         <h3>Customer info</h3>
+                         <div class="d-flex justify-content-between">
+                              <div class="col-5 ">
+                                   <div class="row">
+                                        <div class="col-6 text-muted">Account number</div>
+                                        <div class="col-6">{{customer.account_number}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Loan type</div>
+                                        <div class="col-6">{{customer.loan_type}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Loan type</div>
+                                        <div class="col-6">{{customer.customer_name}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Open State</div>
+                                        <div class="col-6">{{customer.open_state}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Account status</div>
+                                        <div class="col-6">{{customer.acc_status}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Date request</div>
+                                        <div class="col-6">{{customer.date_request|date:"m/d/Y"}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Date Open account</div>
+                                        <div class="col-6">{{customer.date_open_acc|date:"m/d/Y" }}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Military Date</div>
+                                        <div class="col-6">{{customer.military_date|date:"m/d/Y" }}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Method notification</div>
+                                        <div class="col-6">{{customer.method_notification}}</div>
+                                        <hr class="mt-2">
+                                   </div>
+                              </div>
+                              {% if customer.qualify == True %}
+                              <div class="col-5 ">
+                                   <div class="row">
+                                        <div class="col-6 text-muted">Amount Refund</div>
+                                        <div class="col-6">{{customer.amount_refund }}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">The way Refund</div>
+                                        <div class="col-6">{{customer.the_way_refund}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Date Refund</div>
+                                        <div class="col-6">{{customer.date_refund}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Where fees?</div>
+                                        <div class="col-6">{{customer.where_fees}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Where Waived?</div>
+                                        <div class="col-6">{{customer.where_waived}}</div>
+                                        <hr class="mt-2">
+                                        <div class="col-6 text-muted">Waive Interest?</div>
+                                        <div class="col-6">{{customer.waive_interest}}</div>
+                                        <hr class="mt-2">
+                                   </div>
+                              </div>
+                              {% endif %}
+                         </div>
+                         <div class="">
+                              <div class="fw-bolder">Eduardo</div>
+                              <p>
+                                   {{customer.status_notes}}
+                              </p>
+                              <input class="form-control" type="text" name="" id="" placeholder="New note">
+                         </div>
+                    </div>
+              </div>
+              <div class="tab-pane fade" id="profile" role="tabpanel">
+                Contenido de la pestaña Perfil...
+              </div>
+            </div>
+           
+          </ul>
+      </div>
+  
+
+
+  </div>
+
+
+</div>
+
+{% endblock content %}
