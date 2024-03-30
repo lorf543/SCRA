@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Customer
+from .models import Customer,Address
 # Register your models here.
 
 
@@ -15,6 +15,8 @@ class CustomerAdmind(admin.ModelAdmin):
         ("More information latter",{"fields":("first_review","date_mil")}),
         ("Second information latter",{"fields":("second_review","date_2mil","date_alert_dl")}),
 ]
-    
-    
 admin.site.register(Customer,CustomerAdmind)
+
+
+
+admin.site.register(Address)

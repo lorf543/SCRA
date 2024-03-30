@@ -41,11 +41,17 @@ class Customer(models.Model):
         # _______________________Approved_Info________________
     amount_refund = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     the_way_refund = models.CharField(max_length=50, blank=True, null=True,default="N/A")
-    date_refund = models.DateField(
-        auto_now=False, auto_now_add=False, blank=True, null=True,default="N/A")
+    date_refund = models.DateField(blank=True, null=True, default="N/A")
     where_fees = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     where_waived = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     waive_interest = models.CharField(max_length=50, blank=True, null=True,default="N/A")
+    
+    
+    
+    created = models.DateTimeField(auto_now_add=True, null=True, blank = True)
+    updated = models.DateTimeField(null=True, blank = True)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custumer_add', null=True, blank = True)
+    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custumer_update',null=True, blank = True)
     
     class Meta:
         verbose_name = 'Customer'
@@ -58,7 +64,8 @@ class Customer(models.Model):
         return self.military_date.strftime('%m/%d/%Y')
     
     def save(self, *args, **kwargs):
-        is_new_candidate = self.pk
+            
+        self._state.adding
         
         # special states
         if self.military_date and self.open_state == "Ohio":
@@ -68,18 +75,27 @@ class Customer(models.Model):
             days_difference = (self.date_open_acc - self.military_date).days
             if days_difference < 30:
                 self.qualify = True
-                
-        elif self.date_open_acc <= self.military_date:
+        
+        elif self.military_date:
+            print('step del infierno')
+            self.status_notes = f"""
+                    SCRA account review. we have check form military
+                    date {self.military_date.strftime('%m/%d/%Y')}. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.
+                    account does not qualify for SCRA benefits. 
+                    issuing a more information latter.
+                """
+            if self.military_date >= self.date_open_acc:
+                self.qualify = True
 
-            self.qualify = True
-            
         else:
+            print('note not date triger')
             self.status_notes =  f"""
-            SCRA account review. we have check form military 
-            date N/A and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.
-            account does not qualify for SCRA benefits. 
-            issuing a more information latter.
-                    """
+                    SCRA account review. we have check form military
+                    date N/A. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.
+                    account does not qualify for SCRA benefits. 
+                    issuing a more information latter.
+                """
+
             self.qualify = False
             
         super(Customer, self).save(*args, **kwargs)  
@@ -92,6 +108,29 @@ def set_letter_dates(sender, instance, *args, **kwargs):
     pre_save.connect(set_letter_dates, sender=Customer)
     
     
+class Address(models.Model):
+    customer = models.ForeignKey(Customer, related_name="customer_address", on_delete=models.CASCADE,null=True, blank = True)
+    street = models.CharField(max_length=150, null=True, blank = True)
+    street2 = models.CharField(max_length=150, null=True, blank = True)
+    city = models.CharField(max_length=150, null=True, blank = True)
+    state = models.CharField(max_length=150, choices=ESTADOS_UNIDOS ,null=True, blank = True)
+    zipcode = models.CharField(max_length=25, null=True, blank = True)
+    return_type = models.CharField(max_length=50, choices=RETURN_TYPE, blank=True, null=True)
+    return_note = models.TextField(null=True, blank=True)
+    address_status = models.CharField(max_length=50, choices=ADDRESS_STATUS,blank=True, null=True)
 
+
+    created = models.DateTimeField(auto_now_add=True, null=True, blank = True)
+    updated = models.DateTimeField(null=True, blank = True)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='address_add', null=True, blank = True)
+    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='address_update',null=True, blank = True)
+    
+    
+    class Meta:
+        verbose_name = 'Customer Addresse'
+        
+    def __str__(self):
+        return self.customer.customer_name +" "+ self.street
+    
     
     

@@ -17,7 +17,10 @@ body {
   border-radius: 5px;
 }
 
-#scraList thead{
+#scraList  thead{
+  display: none;
+}
+#trackerReturn  thead{
   display: none;
 }
 

@@ -13,5 +13,4 @@ htmx_urlpatterns = [
     path('check-username/',views.check_username,name='check_username'),
 ]
 
-
 urlpatterns += htmx_urlpatterns

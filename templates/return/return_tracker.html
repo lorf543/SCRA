@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+<title>Scra {% block title %}Return{% endblock title %}</title>
+
+{% block content %}
+
+<div class="wrapper vh-100 bg-dark">
+    {% include "layout/sidebar.html" %}
+
+  <div class="container pt-5">
+    <div class="container pt-2 bg-white rounded">
+      <table id="trackerReturn" class="table table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Customer name</th>
+              <th>Account number</th>
+              <th>Account street</th>
+              <th>Return letter</th>
+              <th>Return main</th>
+              <th>Return created</th>
+              <th>Return noted</th>
+
+            </tr>
+          </thead>
+          <tbody class="">
+            {% for addres in address %}
+            <tr>
+              <td class="text-center">{{ forloop.counter }}</td>
+              <td class="text-center">{{addres.customer.customer_name}}</td>
+              <td class="text-center">{{addres.customer.account_number}}</td>
+              <td class="text-start">{{addres.street}} {{addres.street2}} {{addres.city}} <br> {{addres.state}} {{addres.zipcode}} </td>
+              <td class="text-start">{{addres.type}}</td>
+              <td class="text-start">{{addres.main}}</td>
+              <td class="text-start">{{addres.created|date:"m/d/Y"}}</td>
+              <td class="text-start">{{addres.return_note}}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+  </div>
+  </div>
+
+</div>
+
+{% endblock content %}

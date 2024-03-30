@@ -1,0 +1,30 @@
+<div class="container p-3">
+    <h3>Customer Addresses</h3>
+
+    {% for address in customer.customer_address.all %}
+      <div class="card my-1" style="width: 45rem;">
+        <div class="card-body">
+          {% if address.address_status == 'Active' %}
+            <h5 class="card-title"> Main address</h5>
+          {% endif %}
+          <div class="d-flex justify-content-around align-items-center">
+            <p class="card-text">
+              {{address.street}}, {{ address.street2}} <br/>
+              {{address.city}} {{address.city}} {{address.zipcode}}
+
+              {% if address.address_status == 'Return' %}
+                <h2><span class="badge rounded-pill text-bg-danger">
+                  {{address.address_status}} /{{address.return_type}}
+                </span></h2>
+              {% else %}
+              <h2><span class="badge rounded-pill text-bg-success">
+                {{address.address_status}}
+              </span></h2>
+              {% endif %}
+
+
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+</div>

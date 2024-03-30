@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %} 
+
+
+{% block content %}
+
+<section class="pt-5">
+
+    <div class="container p-3  border shadow bg-white rounded">
+
+        <a class="d-flex mb-2 align-items-center justify-content-center  btn btn-outline-secondary shadow btn-sm" style="width: 18rem;" href="{{request.META.HTTP_REFERER}}">
+          <i class="h1 lni lni-arrow-left-circle"></i>
+          <h3 class="px-3">Back to tracker</h3>
+      </a>
+
+        <h2 class="py-1">Add Customer</h2>
+
+        <form method="POST">
+          {% csrf_token %}
+            <!-- 2 column grid layout with text inputs for the first and last names -->
+            <div class="row mb-4">
+              <div class="col">
+                <div data-mdb-input-init class="form-outline">
+                    {{customer_form.customer_name|as_crispy_field}}
+                </div>
+              </div>
+              <div class="col-2">
+                <div id="customer_error"></div>
+                <div data-mdb-input-init class="form-outline">
+                    {{customer_form.account_number|as_crispy_field}}
+                </div>
+              </div>
+              <div class="col-2">
+                <div data-mdb-input-init class="form-outline">
+                    {{customer_form.open_state|as_crispy_field}}
+                </div>
+              </div>
+              <div class="col-2">
+                <div data-mdb-input-init class="form-outline">
+                    {{customer_form.acc_status|as_crispy_field}}
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-2">
+                  <div data-mdb-input-init class="form-outline">
+                      {{customer_form.method_notification|as_crispy_field}}
+                  </div>
+                </div>
+                <div class="col-2">
+                    <div data-mdb-input-init class="form-outline">
+                        {{customer_form.military_date|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div data-mdb-input-init class="form-outline">
+                        {{customer_form.date_open_acc|as_crispy_field}}
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div data-mdb-input-init class="form-outline">
+                        {{customer_form.date_request|as_crispy_field}}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            {% if customer.qualify == True %}
+
+            si
+            {% else %}
+                <div class="row mb-4">
+
+                    <div class="col-2">
+                        <div data-mdb-input-init class="form-outline">
+                            {{customer_form.amount_refund|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div data-mdb-input-init class="form-outline">
+                            {{customer_form.the_way_refund|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div data-mdb-input-init class="form-outline">
+                            {{customer_form.date_refund|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div data-mdb-input-init class="form-outline">
+                            {{customer_form.where_fees|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div data-mdb-input-init class="form-outline">
+                            {{customer_form.where_fees|as_crispy_field}}
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div data-mdb-input-init class="form-outline">
+                            {{customer_form.where_fees|as_crispy_field}}
+                        </div>
+                    </div>
+
+                </div>
+
+            {% endif %}
+            
+            <!-- Submit button -->
+            <div>
+              <button class="btn btn-success m-3" type="submit">Submit form</button>
+          </div>
+        </form>
+    </div>
+</section>
+
+
+
+{% endblock content %}

@@ -6,7 +6,10 @@ from . import views
 urlpatterns = [
     path('',views.home,name='home'),
     path('add-customer/',views.add_customer,name='add_customer'),
-    path('list-customer/<str:pk_customer>/',views.list_customer,name='list_customer'),
+    path('detail-customer/<str:pk_customer>/',views.detail_customer,name='detail_customer'),
+    path('update-customer/<str:customer_id>/',views.update_customer,name='update_customer'),
+    
+    path('return-letter/',views.return_letter,name='return-letter'),
 ]
 
 htmx_urlpatterns = [

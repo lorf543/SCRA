@@ -1,0 +1,72 @@
+<div class="container p-3">
+     <div class="d-flex align-items-center pb-3">
+          <h3>Customer info</h3>
+          <a class="ms-3 btn btn-outline-dark" href="{% url 'update_customer' customer_id=customer.id %}">
+               <i class="lni lni-pencil"></i>
+          </a>
+     </div>
+    <div class="d-flex justify-content-between">
+         <div class="col-5 ">
+              <div class="row">
+                   <div class="col-6 text-muted">Account number</div>
+                   <div class="col-6">{{customer.account_number}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Loan type</div>
+                   <div class="col-6">{{customer.loan_type}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Loan type</div>
+                   <div class="col-6">{{customer.customer_name}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Open State</div>
+                   <div class="col-6">{{customer.open_state}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Account status</div>
+                   <div class="col-6">{{customer.acc_status}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Date request</div>
+                   <div class="col-6">{{customer.date_request|date:"m/d/Y"}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Date Open account</div>
+                   <div class="col-6">{{customer.date_open_acc|date:"m/d/Y" }}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Military Date</div>
+                   <div class="col-6">{{customer.military_date|date:"m/d/Y" }}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Method notification</div>
+                   <div class="col-6">{{customer.method_notification}}</div>
+                   <hr class="mt-2">
+              </div>
+         </div>
+         {% if customer.qualify == True %}
+         <div class="col-5 ">
+              <div class="row">
+                   <div class="col-6 text-muted">Amount Refund</div>
+                   <div class="col-6">{{customer.amount_refund }}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">The way Refund</div>
+                   <div class="col-6">{{customer.the_way_refund}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Date Refund</div>
+                   <div class="col-6">{{customer.date_refund}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Where fees?</div>
+                   <div class="col-6">{{customer.where_fees}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Where Waived?</div>
+                   <div class="col-6">{{customer.where_waived}}</div>
+                   <hr class="mt-2">
+                   <div class="col-6 text-muted">Waive Interest?</div>
+                   <div class="col-6">{{customer.waive_interest}}</div>
+                   <hr class="mt-2">
+              </div>
+         </div>
+         {% endif %}
+    </div>
+    <div class="">
+         <div class="fw-bolder">Eduardo</div>
+         <p>
+              {{customer.status_notes}}
+         </p>
+         <input class="form-control" type="text" name="" id="" placeholder="New note">
+    </div>
+</div>
