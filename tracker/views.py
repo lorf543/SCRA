@@ -28,6 +28,7 @@ def check_customer(request):
         
 
 def add_customer(request):
+    
     form = CustomerForm()
     
     if request.method == 'POST':
