@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 
+
 from .utility import *
 from datetime import datetime, timedelta
 
@@ -34,19 +35,20 @@ class Customer(models.Model):
     date_mil = models.DateField(blank=True, null=True)
     date_alert_dl = models.DateField(
         auto_now=False, auto_now_add=False, blank=True, null=True)
-        #_____________________________Second Info Letter_______________________________
+        #_____________________________Denial Letter_______________________________
     second_review = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='second_review_candidates', blank=True, null=True)
-    date_2mil = models.DateField(blank=True, null=True)
+    danial_date = models.DateField(blank=True, null=True)
+    denial_note = models.TextField(blank=True, null=True)
+    denial_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custumer_dl',null=True, blank = True)
+    
         # _______________________Approved_Info________________
     amount_refund = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     the_way_refund = models.CharField(max_length=50, blank=True, null=True,default="N/A")
-    date_refund = models.DateField(blank=True, null=True, default="N/A")
+    date_refund = models.DateField(blank=True, null=True)
     where_fees = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     where_waived = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     waive_interest = models.CharField(max_length=50, blank=True, null=True,default="N/A")
-    
-    
     
     created = models.DateTimeField(auto_now_add=True, null=True, blank = True)
     updated = models.DateTimeField(null=True, blank = True)
@@ -64,7 +66,7 @@ class Customer(models.Model):
         return self.military_date.strftime('%m/%d/%Y')
     
     def save(self, *args, **kwargs):
-            
+
         self._state.adding
         
         # special states
@@ -77,7 +79,6 @@ class Customer(models.Model):
                 self.qualify = True
         
         elif self.military_date:
-            print('step del infierno')
             self.status_notes = f"""
                     SCRA account review. we have check form military
                     date {self.military_date.strftime('%m/%d/%Y')}. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.
@@ -88,7 +89,6 @@ class Customer(models.Model):
                 self.qualify = True
 
         else:
-            print('note not date triger')
             self.status_notes =  f"""
                     SCRA account review. we have check form military
                     date N/A. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.

@@ -28,20 +28,37 @@ def check_customer(request):
         
 
 def add_customer(request):
-    
     form = CustomerForm()
     
     if request.method == 'POST':
         customer_form = CustomerForm(request.POST)
         print(customer_form.errors)
-        if customer_form.is_valid():
-           customer = customer_form.save(commit=False)
-           customer.added_by = request.user
-           
+        if  customer_form.is_valid():
+            customer = customer_form.save(commit=False)
+            customer.added_by = request.user
+            customer.save()
         return redirect('/')
             
     context = {'customer_form' : form}
     return render(request,'tracker/add_customer.html',context)
+
+def dl_note(customer,request):
+    if customer.danial_date:
+                customer.denial_by = request.user
+                if customer.military_date:
+                    customer.denial_note =  f"""
+                        SCRA account review. we have check form military
+                        date {customer.military_date.strftime('%m/%d/%Y')}. and the open account date {customer.date_open_acc.strftime('%m/%d/%Y')}.
+                        account does not qualify for SCRA benefits. 
+                        Denial Date.
+                    """
+                else:
+                    customer.denial_note = f"""
+                        SCRA account review. we have check form military
+                        date "N/A. and the open account date {customer.date_open_acc.strftime('%m/%d/%Y')}.
+                        account does not qualify for SCRA benefits. 
+                        Denial Date.
+                    """
 
 
 def update_customer(request,customer_id):
@@ -54,6 +71,8 @@ def update_customer(request,customer_id):
             customer = customer_form.save(commit=False)
             customer.updated_by = request.user
             customer.updated = timezone.now().date()
+            dl_note(customer,request)
+            customer.save()
         return redirect('/')
     else:
         customer_form = CustomerForm(instance=customer)

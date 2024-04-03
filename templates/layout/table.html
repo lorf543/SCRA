@@ -55,7 +55,11 @@
         <td>N/A</td>
       {% endif %}
       <td class="text-center">{{customer.the_way_refund}}</td>
-      <td class="text-center">{{customer.date_refund}}</td>
+      {% if  customer.date_refund %}
+      <td class="text-center">{{customer.date_refund|date:"m/d/Y"}}</td>
+      {% else %}
+        <td>N/A</td>
+      {% endif %}
       <td class="text-center">{{customer.where_fees}}</td>
       <td class="text-center">{{customer.where_waived}}</td>
       <td class="text-center">{{customer.waive_interest}}</td>
@@ -63,8 +67,13 @@
       <td class="text-center">{{customer.first_review|date:"m/d/Y"}}</td>
       <td class="text-center">{{customer.date_mil|date:"m/d/Y"}}</td>
       <td class="text-center bg-secondary">{{customer.date_alert_dl|date:"m/d/Y"}}</td>
-      <td class="text-center"></td>
-      <td class="text-center">ES</td>
+      <td class="text-center">{{customer.danial_date|date:"m/d/Y"}}</td>
+      {% if  customer.denial_by %}
+      <td class="text-center">{{customer.denial_by}}</td>
+      {% else %}
+        <td></td>
+      {% endif %}
+
     </tr>
     {% endfor %}
   </tbody>

@@ -12,6 +12,11 @@
     <div class="card shadow" style="width:850px;">
      <div class="row mt-5">
         <div class="d-flex justify-content-center align-items-center text-center">
+          <div class="d-flex align-items-center pb-3">
+            <a class="ms-3 btn btn-outline-dark" href="{% url 'update_customer' customer_id=customer.id %}">
+                 <i class="lni lni-pencil"></i>
+            </a>
+            </div>
             <div class="row">
                 <h3 class="mt-1" >{{customer.customer_name}}</h3>
                 <h6 class="text-secondary">{{customer.account_number}}</h6>

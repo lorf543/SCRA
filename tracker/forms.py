@@ -8,6 +8,9 @@ class CustomerForm(forms.ModelForm):
         required=False,
         widget=forms.Textarea(attrs={"rows":"5","cols": "15"}))
     
+    date_refund = forms.DateField(
+        required=False
+    )
 
     account_number = forms.CharField(
         widget=forms.TextInput(attrs={
@@ -27,12 +30,14 @@ class CustomerForm(forms.ModelForm):
             'amount_refund':'Amount Refund',
             'date_open_acc':'Date Open Account',
             'the_way_refund':'Way the refund was made',
+            'danial_date':'Denial date',
         }
         widgets = {
             'date_refund': forms.DateInput(attrs={'type':'date',}),
             'date_open_acc': forms.DateInput(attrs={'type':'date',}),
             'military_date': forms.DateInput(attrs={'type':'date',}),
             'date_request': forms.DateInput(attrs={'type':'date',}),
+            'danial_date': forms.DateInput(attrs={'type':'date',}),
         }
         
         
