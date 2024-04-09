@@ -83,17 +83,16 @@ class Customer(models.Model):
                     SCRA account review. we have check form military
                     date {self.military_date.strftime('%m/%d/%Y')}. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.
                     account does not qualify for SCRA benefits. 
-                    issuing a more information latter.
+                    issuing a more information letter.
                 """
             if self.military_date >= self.date_open_acc:
                 self.qualify = True
-
         else:
             self.status_notes =  f"""
                     SCRA account review. we have check form military
                     date N/A. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.
                     account does not qualify for SCRA benefits. 
-                    issuing a more information latter.
+                    issuing a more information letter.
                 """
 
             self.qualify = False

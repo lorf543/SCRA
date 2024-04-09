@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Blinker:wght@100;200;300;400;600;700;800;900&display=swap');
 
-
+:root {
+  --main-bg-color: rgb(36, 176, 167);;
+  --main-text-color: #009d63;
+  --second-text-color: #bbbec5;
+  --second-bg-color: #c1efde;
+}
 
 body {
   font-family: "Blinker", sans-serif;
-
 }
 
 
@@ -24,19 +28,11 @@ body {
   display: none;
 }
 
-:root {
-  --main-bg-color: rgb(36, 176, 167);;
-  --main-text-color: #009d63;
-  --second-text-color: #bbbec5;
-  --second-bg-color: #c1efde;
-  
-}
-
 ::after,
 ::before {
   box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding: 0; 
 }
 
 a {
@@ -60,7 +56,7 @@ h1 {
 .main {
   min-height: 100vh;
   width: 100%;
-  overflow: hidden;
+  overflow: auto;
   transition: all 0.35s ease-in-out;
   background-color: #fafbfe;
 }

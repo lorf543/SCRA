@@ -1,0 +1,55 @@
+{% extends "base.html" %} 
+
+
+{% block content %}
+<section class="wrapper vh-100">
+  {% include "layout/sidebar.html" %}
+
+
+    
+  <div class="main p-1 bg-dark">
+
+    <form class="col-sm-4 p-3 mb-3 mb-sm-0" action="{% url 'list_notes' %}" method="GET">
+        <div class="input-group">
+            <input 
+            class="form-control rounded" 
+            id="searchnote" 
+            type="text"
+            name="q" 
+            placeholder="Search"/>
+            <button type="submit" class="btn btn-outline-success" data-mdb-ripple-init>search</button>
+        </div>
+    </form>
+
+    <div class="col-sm-2 px-3 col-md-4 mb-3 mb-sm-0">
+      <div class="card">
+          <div class="card-body">
+              <div class="title fw-bold h3">Add new note</div>
+              <a class="btn btn-outline-success w-100" href="{% url 'add_notes' %}">
+                  <div class="card-text text-center h2">
+                      <big class="fs-1">+</big>
+                  </div>
+              </a>
+          </div>
+      </div>
+  </div>    
+    <div class="row p-3">
+    {% for note in notes %}
+        <div class="col-sm-4 col-md-6 mb-3 mb-sm-0" id="search-results">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title fw-bold h3">{{note.note_title}}</h5>
+              <hr>
+              <p class="card-text"> {{note.note|truncatechars:170}}</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+    {% endfor %}
+      </div>
+  </div>
+
+
+</section>
+
+{% endblock content %}
