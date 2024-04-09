@@ -36,22 +36,31 @@ def login_user(request):
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 @never_cache
 def register_user(request):
-    if request.user.is_authenticated:
-        return redirect('home')
 
     if request.method == 'POST':
         form = UserCreateForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+
+            # Authenticate the user
             username = form.cleaned_data['username']
             password = form.cleaned_data['password1']
-
+            print(form.errors)
             user = authenticate(request, username=username, password=password)
-            login(request, user)
-            messages.success(request, 'Registration succesful')
-            return redirect('home')
+
+            # Login the user
+            if user is not None:
+                login(request, user)
+                messages.success(request, 'Registration successful')
+                return redirect('home')
+            else:
+                messages.error(request, 'Registration failed. Please try again.')
+        else:
+            print(form.errors)
+            messages.error(request, 'Form is not valid. Please check the entered data.')
     else:
         form = UserCreateForm()
+
     return render(request, 'auth/authenticate/register_user.html', {'form': form})
 
 

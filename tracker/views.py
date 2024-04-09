@@ -1,23 +1,19 @@
 from django.shortcuts import render, get_object_or_404,get_list_or_404,HttpResponse,redirect
 
+from django.contrib.auth.decorators import login_required
+
 from .models import Customer,Address
-from .forms import CustomerForm
+from .forms import CustomerForm,AddressForm
 
 from django.utils import timezone
 # Create your views here.
 
 
-
+@login_required(login_url='login_user')
 def home(request):
     customer = get_list_or_404(Customer)
     context ={'customers':customer}
     return render(request, 'tracker/home.html',context)
-
-
-def customer_list(request):
-    customer = get_object_or_404(Customer)
-    context ={'customer':customer}
-    return render(request,'',context)
 
 
 def check_customer(request):
@@ -26,7 +22,7 @@ def check_customer(request):
     if Customer.objects.filter(account_number=account_number).exists():
         return render(request,'partials/already_added.html',)
         
-
+@login_required(login_url='login_user')
 def add_customer(request):
     form = CustomerForm()
     
@@ -61,6 +57,7 @@ def dl_note(customer,request):
                     """
 
 
+@login_required(login_url='login_user')
 def update_customer(request,customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
 
@@ -80,14 +77,38 @@ def update_customer(request,customer_id):
     context = {'customer_form' : customer_form,'customer':customer}
     return render(request,'tracker/update_customer.html',context)
 
-def detail_customer(request, pk_customer):
-    customer = get_object_or_404(Customer, id=pk_customer)
+@login_required(login_url='login_user')
+def detail_customer(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
     context ={'customer':customer}
     return render(request,'tracker/detail_customer.html',context)
 
 
-#________________________Adress________________________________
-def return_letter(request):
+#________________________Address________________________________
+
+def address_list(request):
+    customer = Customer.objects.all()
     address = Address.objects.all()
-    context = {'address':address}
+    
+    context = {'address':address,'customer':customer}
     return render(request,'return/return_tracker.html',context)
+
+
+def add_address(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    address_form = AddressForm()
+    
+    if request.method == 'POST':
+        address_form = AddressForm(request.POST)
+        print(address_form.errors)
+        if address_form.is_valid():
+            address = address_form.save(commit=False)
+            address.customer = customer
+            address.added_by = request.user
+            address.save()
+            return redirect('detail_customer', customer.id)
+    else:
+        address_form = AddressForm()
+        
+    context = {'address_form':address_form,'customer':customer}
+    return render(request,'return/add_address.html',context)

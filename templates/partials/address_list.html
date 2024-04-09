@@ -1,13 +1,23 @@
 <div class="container p-3">
-    <h3>Customer Addresses</h3>
+    <div class="d-flex">
+      <h3>Customer Addresses</h3>
+      <h2 class="ms-3 ">
+        <a class="btn btn-outline-success" href="{% url 'add_address' customer_id=customer.id %}">+</a>
+      </h2>
+    </div>
 
     {% for address in customer.customer_address.all %}
       <div class="card my-1" style="width: 45rem;">
         <div class="card-body">
           {% if address.address_status == 'Active' %}
-            <h5 class="card-title"> Main address</h5>
+            <div class="d-flex align-items-center">
+              <h5 class="card-title"> Main address</h5>
+            </div>
           {% endif %}
           <div class="d-flex justify-content-around align-items-center">
+            <a class="ms-2 btn btn-outline-success" href="{% url 'update_customer' customer_id=customer.id %}">
+              <i class="lni lni-pencil"></i>
+            </a>  
             <p class="card-text">
               {{address.street}}, {{ address.street2}} <br/>
               {{address.city}} {{address.city}} {{address.zipcode}}

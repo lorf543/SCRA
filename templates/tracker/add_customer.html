@@ -19,28 +19,28 @@
       {% csrf_token %}
       <!-- 2 column grid layout with text inputs for the first and last names -->
       <div class="row mb-4">
-        <div class="col-4">
+        <div class="col-12 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.customer_name|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-md-4">
           <div id="customer_error"></div>
           <div data-mdb-input-init class="form-outline">
             {{customer_form.account_number|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.open_state|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.acc_status|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.loan_type|as_crispy_field}}
           </div>
@@ -48,22 +48,22 @@
       </div>
 
       <div class="row mb-4">
-        <div class="col-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.method_notification|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.military_date|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.date_open_acc|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.date_request|as_crispy_field}}
           </div>

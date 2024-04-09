@@ -1,9 +1,15 @@
 <div class="container pt-2">
 
+     
      <div class="d-flex justify-content-between pt-2">
-         <div class="col-5">
+         <div class="col-6">
               <div class="row">
-                   <div class="col-6 text-muted">Account number</div>
+                   <div class="col-6 text-muted d-flex align-items-center">
+                    Account number  
+                         <a class="ms-2 btn btn-outline-success" href="{% url 'update_customer' customer_id=customer.id %}">
+                              <i class="lni lni-pencil"></i>
+                         </a>
+                    </div>
                    <div class="col-6">{{customer.account_number}}</div>
                    <hr class="mt-2">
                    <div class="col-6 text-muted">Loan type</div>
@@ -58,10 +64,10 @@
          {% endif %}
      </div>
      <div class="">
-          <h5 class="fw-bold">{{customer.added_by}}</h5>
+          <h5 class="fw-bold">{{customer.added_by}} - MIL</h5>
           <p>{{customer.status_notes}}</p>
           <hr>
-          <h5 class="fw-bold">{{customer.denial_by}}</h5>
+          <h5 class="fw-bold">{{customer.denial_by}} - DL</h5>
           <p>{{customer.denial_note}}</p>
      </div>
 

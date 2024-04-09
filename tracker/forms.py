@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Customer
+from .models import Customer,Address
 
 
 class CustomerForm(forms.ModelForm):
@@ -45,6 +45,13 @@ class CustomerForm(forms.ModelForm):
         super(CustomerForm, self).__init__(*args, **kwargs)
         self.fields['account_number'].label = "Acc number"
  
+      
+class AddressForm(forms.ModelForm):
+    
+    class Meta:
+        model = Address
+        fields = ['street','street2','city','state','zipcode','address_status']
+
         
     
         

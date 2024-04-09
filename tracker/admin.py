@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Customer,Address
+from .models import Customer
 # Register your models here.
 
 
@@ -19,4 +19,3 @@ admin.site.register(Customer,CustomerAdmind)
 
 
 
-admin.site.register(Address)

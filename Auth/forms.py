@@ -19,7 +19,8 @@ class UserCreateForm(UserCreationForm):
 
         }
         
-        fields = "__all__"
+        fields = ["username", "password1", "password2"]
+        exclude = ["email",]
         
         widgets = {
             'username': forms.TextInput (

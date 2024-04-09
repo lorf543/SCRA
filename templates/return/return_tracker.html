@@ -17,24 +17,35 @@
               <th>Account number</th>
               <th>Account street</th>
               <th>Return letter</th>
-              <th>Return main</th>
+              <th>Return Note</th>
               <th>Return created</th>
               <th>Return noted</th>
+              <th>Added by</th>
+              <th>Updated by by</th>
 
             </tr>
           </thead>
           <tbody class="">
             {% for addres in address %}
-            <tr>
-              <td class="text-center">{{ forloop.counter }}</td>
-              <td class="text-center">{{addres.customer.customer_name}}</td>
-              <td class="text-center">{{addres.customer.account_number}}</td>
-              <td class="text-start">{{addres.street}} {{addres.street2}} {{addres.city}} <br> {{addres.state}} {{addres.zipcode}} </td>
-              <td class="text-start">{{addres.type}}</td>
-              <td class="text-start">{{addres.main}}</td>
-              <td class="text-start">{{addres.created|date:"m/d/Y"}}</td>
-              <td class="text-start">{{addres.return_note}}</td>
-            </tr>
+              {% if addres.address_status == 'Return' %}
+              <tr>
+                <td class="text-center">{{ forloop.counter }}</td>
+                <td class="text-center">
+                  <a class="btn btn-success" href="{% url 'detail_customer' addres.customer.id %}">
+                    {{addres.customer.customer_name}}
+                  </a>
+                </td>
+                <td class="text-center">{{addres.customer.account_number}}</td>
+                <td class="text-start">{{addres.street}} {{addres.street2}} {{addres.city}} <br> {{addres.state}} {{addres.zipcode}} </td>
+                <td class="text-start">{{addres.return_type}}</td>
+                <td class="text-start">{{addres.return_note}}</td>
+                <td class="text-start">{{addres.created|date:"m/d/Y"}}</td>
+                <td class="text-start">{{addres.return_note}}</td>
+                <td class="text-start">{{addres.added_by}}</td>
+                <td class="text-start">{{addres.updated_by}}</td>
+              </tr>
+              
+              {% endif %}
             {% endfor %}
           </tbody>
         </table>
