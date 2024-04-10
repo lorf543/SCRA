@@ -66,7 +66,6 @@ class Customer(models.Model):
         return self.military_date.strftime('%m/%d/%Y')
     
     def save(self, *args, **kwargs):
-
         self._state.adding
         
         # special states

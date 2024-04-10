@@ -1,55 +1,98 @@
 {% extends "base.html" %} 
-
-
 {% block content %}
 <section class="wrapper vh-100">
   {% include "layout/sidebar.html" %}
 
-
-    
   <div class="main p-1 bg-dark">
-
-    <form class="col-sm-4 p-3 mb-3 mb-sm-0" action="{% url 'list_notes' %}" method="GET">
-        <div class="input-group">
-            <input 
-            class="form-control rounded" 
-            id="searchnote" 
-            type="text"
-            name="q" 
-            placeholder="Search"/>
-            <button type="submit" class="btn btn-outline-success" data-mdb-ripple-init>search</button>
-        </div>
+    <form
+      class="col-sm-4 p-3 mb-3 mb-sm-0"
+      action="{% url 'list_notes' %}"
+      method="GET"
+    >
+      <div class="input-group">
+        <input
+          class="form-control rounded"
+          id="searchnote"
+          type="text"
+          name="q"
+          placeholder="Search"
+        />
+        <button
+          type="submit"
+          class="btn btn-outline-success"
+          data-mdb-ripple-init
+        >
+          search
+        </button>
+      </div>
     </form>
 
     <div class="col-sm-2 px-3 col-md-4 mb-3 mb-sm-0">
       <div class="card">
-          <div class="card-body">
-              <div class="title fw-bold h3">Add new note</div>
-              <a class="btn btn-outline-success w-100" href="{% url 'add_notes' %}">
-                  <div class="card-text text-center h2">
-                      <big class="fs-1">+</big>
-                  </div>
-              </a>
-          </div>
+        <div class="card-body">
+          <div class="title fw-bold h3">Add new note</div>
+          <a class="btn btn-outline-success w-100" href="{% url 'add_notes' %}">
+            <div class="card-text text-center h2">
+              <big class="fs-1">+</big>
+            </div>
+          </a>
+        </div>
       </div>
-  </div>    
+    </div>
     <div class="row p-3">
-    {% for note in notes %}
-        <div class="col-sm-4 col-md-6 mb-3 mb-sm-0" id="search-results">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title fw-bold h3">{{note.note_title}}</h5>
-              <hr>
-              <p class="card-text"> {{note.note|truncatechars:170}}</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+      {% for note in notes %}
+      <div class="col-sm-4 col-md-4 mb-3 mb-sm-0 py-1" id="search-results">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title fw-bold h3">{{note.note_title}}</h5>
+            <hr />
+            <p class="card-text">{{note.note|truncatechars:170}}</p>
+            <a href="{% url 'update_notes' note.id %}" class="btn btn-success">
+              Update
+            </a>
+            <button
+              type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+              Delete
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="deleteModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Are you sure want to delete this note?
+              </h1>
+              <button
+                type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <h5 class="card-title h-6">{{note.note_title}}</h5>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                Close
+              </button>
+                <form action="{% url 'delete_notes' note.id %}" method="post">
+                  {% csrf_token %}
+                  <input type="submit" class="btn btn-danger" value="Delete">
+                </form>
             </div>
           </div>
         </div>
-    {% endfor %}
       </div>
+      {% endfor %}
+    </div>
   </div>
-
-
 </section>
 
 {% endblock content %}

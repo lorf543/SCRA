@@ -56,7 +56,6 @@ def dl_note(customer,request):
                         Denial Date.
                     """
 
-
 @login_required(login_url='login_user')
 def update_customer(request,customer_id):
     customer = get_object_or_404(Customer, id=customer_id)
