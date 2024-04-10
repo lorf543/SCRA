@@ -16,9 +16,12 @@ def login_user(request):
         return redirect('home')
 
     if request.method == 'POST':
+        
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+        messages.success(
+                request, f'Welcome to work {user.get_full_name()}')
 
         if user is not None:
             login(request, user)
@@ -28,7 +31,6 @@ def login_user(request):
             messages.success(
                 request, 'There was an error Logging, try again.')
             return redirect('login_user')
-
     else:
         return render(request, 'auth/authenticate/login.html')
     

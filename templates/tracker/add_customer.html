@@ -1,14 +1,23 @@
 {% extends "base.html" %} 
 {% load crispy_forms_tags %} 
 {% block content %}
-
-<section class="pt-5">
+<div class="container">
+  {% if messages %}
+    <div class="alert-container">
+      {% for message in messages %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          <strong>{{ message }}</strong> 
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>
+<section class="py-5">
   <div class="container p-3 border shadow bg-white rounded">
     <a
       class="d-flex mb-2 align-items-center justify-content-center btn btn-outline-secondary shadow btn-sm"
-      style="width: 18rem"
-      href="{{request.META.HTTP_REFERER}}"
-    >
+      style="width: 18rem" href="{{request.META.HTTP_REFERER}}">
       <i class="h1 lni lni-arrow-left-circle"></i>
       <h3 class="px-3">Back to tracker</h3>
     </a>
@@ -24,7 +33,7 @@
             {{customer_form.customer_name|as_crispy_field}}
           </div>
         </div>
-        <div class="col-4 col-md-4">
+        <div class="col-6 col-md-4">
           <div id="customer_error"></div>
           <div data-mdb-input-init class="form-outline">
             {{customer_form.account_number|as_crispy_field}}
@@ -53,22 +62,61 @@
             {{customer_form.method_notification|as_crispy_field}}
           </div>
         </div>
-        <div class="col-4 col-md-4">
+        <div class="col-6 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.military_date|as_crispy_field}}
           </div>
         </div>
-        <div class="col-4 col-md-4">
+        <div class="col-6 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.date_open_acc|as_crispy_field}}
           </div>
         </div>
-        <div class="col-4 col-md-4">
+        <div class="col-6 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.date_request|as_crispy_field}}
           </div>
         </div>
       </div>
+
+      <hr>
+      <!--Address-->
+      <div class="row mb-1">
+        <div class="col-8 col-md-4">
+            <div data-mdb-input-init class="form-outline">
+                {{ address_form.street|as_crispy_field }}
+            </div>
+        </div>
+        <div class="col-4 col-md-4">
+            <div data-mdb-input-init class="form-outline">
+                {{ address_form.street2|as_crispy_field }}
+            </div>
+      </div>
+
+    <div class="row mb-2">
+        <div class="col-4 col-md-4">
+          <div data-mdb-input-init class="form-outline">
+              {{ address_form.city|as_crispy_field }}
+          </div>
+        </div>
+
+        <div class="col-4 col-md-4">
+            <div data-mdb-input-init class="form-outline">
+                {{ address_form.state|as_crispy_field }}
+            </div>
+        </div>
+        <div class="col-4 col-md-4">
+            <div data-mdb-input-init class="form-outline">
+                {{ address_form.zipcode|as_crispy_field }}
+            </div>
+        </div>
+        <div class="col-6 col-md-4">
+            <div data-mdb-input-init class="form-outline">
+                {{ address_form.address_status|as_crispy_field }}
+            </div>
+        </div>
+    </div>
+
       <!-- Submit button -->
       <div>
         <button class="btn btn-success m-3" type="submit">Submit form</button>

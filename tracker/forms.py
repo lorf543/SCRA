@@ -1,6 +1,6 @@
 from django import forms
 
-from .models import Customer,Address
+from .models import Account,Address
 
 
 class CustomerForm(forms.ModelForm):
@@ -22,7 +22,7 @@ class CustomerForm(forms.ModelForm):
     )    
 
     class Meta:
-        model = Customer
+        model = Account
         
         fields = "__all__"
         
@@ -31,6 +31,7 @@ class CustomerForm(forms.ModelForm):
             'date_open_acc':'Date Open Account',
             'the_way_refund':'Way the refund was made',
             'danial_date':'Denial date',
+            'method_notification':'Notefication'
         }
         widgets = {
             'date_refund': forms.DateInput(attrs={'type':'date',}),

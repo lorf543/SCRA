@@ -4,11 +4,7 @@
   {% include "layout/sidebar.html" %}
 
   <div class="main p-1 bg-dark">
-    <form
-      class="col-sm-4 p-3 mb-3 mb-sm-0"
-      action="{% url 'list_notes' %}"
-      method="GET"
-    >
+    <form  class="col-sm-4 p-3 mb-3 mb-sm-0" action="{% url 'list_notes' %}" method="GET">
       <div class="input-group">
         <input
           class="form-control rounded"
@@ -58,13 +54,7 @@
         </div>
       </div>
       <!-- Modal -->
-      <div
-        class="modal fade"
-        id="deleteModal"
-        tabindex="-1"
-        aria-labelledby="exampleModalLabel"
-        aria-hidden="true"
-      >
+      <div class="modal fade" id="deleteModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">

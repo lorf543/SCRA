@@ -10,7 +10,11 @@ from datetime import datetime, timedelta
 
 # Create your models here.
 
-class Customer(models.Model):
+class Customer_info(models.Model):
+    customer_name = models.CharField(max_length=50, blank=True, null=True)
+    
+
+class Account(models.Model):
         # ___________________Basic_info______________________________________
     account_number = models.CharField(max_length=50, blank=True, null=True)
     loan_type = models.CharField(
@@ -96,18 +100,18 @@ class Customer(models.Model):
 
             self.qualify = False
             
-        super(Customer, self).save(*args, **kwargs)  
+        super(Account, self).save(*args, **kwargs)  
     
-@receiver(pre_save, sender=Customer)
+@receiver(pre_save, sender=Account)
 def set_letter_dates(sender, instance, *args, **kwargs):
     instance.date_mil = datetime.today()
     instance. date_alert_dl = instance.date_mil + timedelta(days=30)
     
-    pre_save.connect(set_letter_dates, sender=Customer)
+    pre_save.connect(set_letter_dates, sender=Account)
     
     
 class Address(models.Model):
-    customer = models.ForeignKey(Customer, related_name="customer_address", on_delete=models.CASCADE,null=True, blank = True)
+    customer = models.ForeignKey(Account, related_name="customer_address", on_delete=models.CASCADE,null=True, blank = True)
     street = models.CharField(max_length=150, null=True, blank = True)
     street2 = models.CharField(max_length=150, null=True, blank = True)
     city = models.CharField(max_length=150, null=True, blank = True)

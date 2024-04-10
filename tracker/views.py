@@ -1,41 +1,55 @@
 from django.shortcuts import render, get_object_or_404,get_list_or_404,HttpResponse,redirect
 
 from django.contrib.auth.decorators import login_required
-
-from .models import Customer,Address
-from .forms import CustomerForm,AddressForm
-
+from django.contrib import messages
 from django.utils import timezone
+
+from .models import Account,Address
+from .forms import CustomerForm,AddressForm
+Account
 # Create your views here.
 
 
 @login_required(login_url='login_user')
 def home(request):
-    customer = get_list_or_404(Customer)
+    customer = get_list_or_404(Account)
     context ={'customers':customer}
     return render(request, 'tracker/home.html',context)
-
 
 def check_customer(request):
     account_number = request.POST.get('account_number')
     print(account_number)
-    if Customer.objects.filter(account_number=account_number).exists():
+    if Account.objects.filter(account_number=account_number).exists():
         return render(request,'partials/already_added.html',)
         
 @login_required(login_url='login_user')
 def add_customer(request):
-    form = CustomerForm()
     
     if request.method == 'POST':
         customer_form = CustomerForm(request.POST)
-        print(customer_form.errors)
-        if  customer_form.is_valid():
+        address_form = AddressForm(request.POST)
+        print(customer_form.errors, address_form.errors)
+        
+        if  customer_form.is_valid() and address_form.is_valid():
             customer = customer_form.save(commit=False)
             customer.added_by = request.user
             customer.save()
-        return redirect('/')
+
+            address = address_form.save(commit=False)
+            address.customer = customer
+            address.made_by = request.user
+            address.save()
             
-    context = {'customer_form' : form}
+            messages.success(
+                request, 'New entry of a customer has been added to SCRA tracker') 
+            return redirect('/')
+    else:
+        customer_form = CustomerForm()
+        address_form = AddressForm()
+            
+
+            
+    context = {'customer_form' : customer_form, 'address_form':address_form}
     return render(request,'tracker/add_customer.html',context)
 
 def dl_note(customer,request):
@@ -58,7 +72,7 @@ def dl_note(customer,request):
 
 @login_required(login_url='login_user')
 def update_customer(request,customer_id):
-    customer = get_object_or_404(Customer, id=customer_id)
+    customer = get_object_or_404(Account, id=customer_id)
 
     if request.method == 'POST':
         customer_form = CustomerForm(request.POST,instance=customer)
@@ -78,23 +92,30 @@ def update_customer(request,customer_id):
 
 @login_required(login_url='login_user')
 def detail_customer(request, customer_id):
-    customer = get_object_or_404(Customer, id=customer_id)
+    customer = get_object_or_404(Account, id=customer_id)
     context ={'customer':customer}
     return render(request,'tracker/detail_customer.html',context)
 
+@login_required(login_url='login_user')
+def delete_customer(request, customer_id):
+    customer = get_object_or_404(Account, id=customer_id)
+    if request.method == "POST":
+        customer.delete()
+        messages.success(
+            request,'The account number associated to this customer has been deleted')
+        return redirect('/')
 
 #________________________Address________________________________
 
 def address_list(request):
-    customer = Customer.objects.all()
+    customer = Account.objects.all()
     address = Address.objects.all()
     
     context = {'address':address,'customer':customer}
     return render(request,'return/return_tracker.html',context)
 
-
 def add_address(request, customer_id):
-    customer = get_object_or_404(Customer, id=customer_id)
+    customer = get_object_or_404(Account, id=customer_id)
     address_form = AddressForm()
     
     if request.method == 'POST':
@@ -111,3 +132,11 @@ def add_address(request, customer_id):
         
     context = {'address_form':address_form,'customer':customer}
     return render(request,'return/add_address.html',context)
+
+
+def delete_address(request, address_id):
+    address = get_object_or_404(Address, id=address_id)
+    if request.method == "POST":
+        address.delete()
+        return redirect('detail_customer')
+    return

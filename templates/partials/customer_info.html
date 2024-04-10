@@ -6,9 +6,12 @@
               <div class="row">
                    <div class="col-6 text-muted d-flex align-items-center">
                     Account number  
-                         <a class="ms-2 btn btn-outline-success" href="{% url 'update_customer' customer_id=customer.id %}">
+                         <a class="ms-2 btn btn-outline-success d-flex align-items-center" href="{% url 'update_customer' customer_id=customer.id %}">
                               <i class="lni lni-pencil"></i>
                          </a>
+                         <button type="button" class="btn btn-outline-danger d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal">
+                              <i class="lni lni-cross-circle"></i>
+                         </button>
                     </div>
                    <div class="col-6">{{customer.account_number}}</div>
                    <hr class="mt-2">
@@ -72,4 +75,30 @@
      </div>
 
 
+     <div class="modal fade" id="deleteCustomerModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">
+                  Are you sure want to delete this Customer?
+                </h1>
+                <button
+                  type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <h5 class="card-title h-6">{{customer.customer_name}}</h5>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                  Close
+                </button>
+                  <form action="{% url 'delete_customer' customer_id=customer.id %}" method="post">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Delete">
+                  </form>
+              </div>
+            </div>
+          </div>
+        </div>
 </div>
