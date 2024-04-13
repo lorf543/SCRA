@@ -130,6 +130,7 @@ class Address(models.Model):
     
     class Meta:
         verbose_name = 'Customer Addresse'
+        ordering = ['created']
         
     def __str__(self):
         return self.customer.customer_name +" "+ self.street

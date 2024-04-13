@@ -12,7 +12,7 @@ body {
 }
 
 
-.alerady-add {
+.already-add {
   background: rgba(242, 219, 13, 0.501);
   box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.75);
   position: absolute;
@@ -25,6 +25,9 @@ body {
   display: none;
 }
 #trackerReturn  thead{
+  display: none;
+}
+#tableInbox thead{
   display: none;
 }
 
@@ -51,14 +54,7 @@ h1 {
 .wrapper {
   display: flex;
   width: 100%;
-}
-
-.main {
-  min-height: 100vh;
-  width: 100%;
-  overflow: auto;
-  transition: all 0.35s ease-in-out;
-  background-color: #fafbfe;
+  height: 100%;
 }
 
 #sidebar {

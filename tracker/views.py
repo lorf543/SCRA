@@ -18,7 +18,6 @@ def home(request):
 
 def check_customer(request):
     account_number = request.POST.get('account_number')
-    print(account_number)
     if Account.objects.filter(account_number=account_number).exists():
         return render(request,'partials/already_added.html',)
         
@@ -28,7 +27,6 @@ def add_customer(request):
     if request.method == 'POST':
         customer_form = CustomerForm(request.POST)
         address_form = AddressForm(request.POST)
-        print(customer_form.errors, address_form.errors)
         
         if  customer_form.is_valid() and address_form.is_valid():
             customer = customer_form.save(commit=False)
@@ -76,7 +74,8 @@ def update_customer(request,customer_id):
 
     if request.method == 'POST':
         customer_form = CustomerForm(request.POST,instance=customer)
-        print(customer_form.errors)
+        
+        #print(customer_form.errors)
         if customer_form.is_valid():
             customer = customer_form.save(commit=False)
             customer.updated_by = request.user
@@ -120,7 +119,7 @@ def add_address(request, customer_id):
     
     if request.method == 'POST':
         address_form = AddressForm(request.POST)
-        print(address_form.errors)
+
         if address_form.is_valid():
             address = address_form.save(commit=False)
             address.customer = customer
@@ -133,7 +132,28 @@ def add_address(request, customer_id):
     context = {'address_form':address_form,'customer':customer}
     return render(request,'return/add_address.html',context)
 
-
+def upadate_address(request, customer_id, address_id):
+    customer = get_object_or_404(Account, id=customer_id)
+    address = get_object_or_404(Address, id=address_id, customer=customer)
+    
+    if request.method == 'POST':
+        address_form = AddressForm(request.POST, instance= address)
+        
+        if address_form.is_valid():
+            address = address_form.save(commit=False)
+            address.updated_by = request.user
+            address.update = timezone.now().date()
+            address.save()
+            messages.success(
+                request,'the address has been updated'
+            )
+        return redirect('detail_customer', customer.id)
+    else:
+        address_form = AddressForm(instance= address)
+        
+    context = {'address_form': address_form,'customer':customer,'address':address}
+    return render(request,'return/update_address.html',context)
+            
 def delete_address(request, address_id):
     address = get_object_or_404(Address, id=address_id)
     if request.method == "POST":

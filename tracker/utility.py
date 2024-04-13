@@ -95,7 +95,7 @@ ADDRESS_STATUS = (
     ('Return', 'Return'),
 )
 
-NOTIFICACION = (
+NOTIFICATION = (
     ('Customer', 'Customer'),
     ('RPA', 'RPA'),
 )

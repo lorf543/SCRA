@@ -22,4 +22,5 @@ urlpatterns = [
     path('',include('Auth.urls')),
     path('',include('tracker.urls')),
     path('scra-notes/',include('scranotes.urls')),
+    path('scra-inbox/',include('Scra_inbox.urls')),
 ]

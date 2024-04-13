@@ -7,21 +7,23 @@
     </div>
 
     {% for address in customer.customer_address.all %}
+
       <div class="card my-1" style="width: 45rem;">
         <div class="card-body">
+
           {% if address.address_status == 'Active' %}
             <div class="d-flex align-items-center">
               <h5 class="card-title"> Main address</h5>
             </div>
           {% endif %}
           <div class="d-flex justify-content-around align-items-center">
-            <a class="ms-2 btn btn-outline-success" href="{% url 'update_customer' customer_id=customer.id %}">
+            <a class="ms-2 btn btn-outline-success" href="{% url 'upadate_address' customer_id=customer.id address_id=address.id %}">
               <i class="lni lni-pencil"></i>
             </a>  
             <p class="card-text">
               {{address.street}}, {{ address.street2}} <br/>
               {{address.city}} {{address.city}} {{address.zipcode}}
-
+              
               {% if address.address_status == 'Return' %}
                 <h2><span class="badge rounded-pill text-bg-danger">
                   {{address.address_status}} /{{address.return_type}}
@@ -32,9 +34,9 @@
               </span></h2>
               {% endif %}
 
-
           </div>
         </div>
       </div>
+
     {% endfor %}
 </div>

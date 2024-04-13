@@ -49,11 +49,16 @@ class CustomerForm(forms.ModelForm):
       
 class AddressForm(forms.ModelForm):
     
+    return_note = forms.CharField(
+        required=False,
+        widget=forms.Textarea(
+            attrs={"rows":5, "cols":5,}))
+        
     class Meta:
         model = Address
-        fields = ['street','street2','city','state','zipcode','address_status']
-
+        fields = ['street','street2','city','state','zipcode',
+                  'address_status','return_note','return_type']
         
     
-        
+
 

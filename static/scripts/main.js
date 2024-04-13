@@ -11,7 +11,14 @@ new DataTable('#scraList',{
   "scrollX":true,
   "scrollY":600,
 });
+
 new DataTable('#trackerReturn',{ 
+  "autoWidth": true,
+  "scrollX":true,
+  "scrollY":600,
+});
+
+new DataTable('#tableIbox',{ 
   "autoWidth": true,
   "scrollX":true,
   "scrollY":600,

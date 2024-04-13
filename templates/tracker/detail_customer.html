@@ -1,10 +1,24 @@
 {% extends "base.html" %} {% block content %}
 
+
 <div class="wrapper vh-100">
   {% include "layout/sidebar.html" %}
+  
 
 
   <div class="container py-3">
+    <div class="container">
+      {% if messages %}
+        <div class="alert-container">
+          {% for message in messages %}
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+              <strong>{{ message }}</strong> 
+              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+  </div>
      <a class="d-flex mb-2 align-items-center justify-content-center  btn btn-outline-secondary shadow btn-sm" style="width: 18rem;" href="/">
           <i class="h1 lni lni-arrow-left-circle"></i>
           <h3 class="px-3">Back to tracker</h3>
@@ -35,7 +49,10 @@
                 <a class="nav-link active" id="home-tab" data-bs-toggle="tab" href="#home" role="tab">Inicio</a>
               </li>
               <li class="nav-item" role="presentation">
-                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#profile" role="tab">Address List</a>
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#addres_list" role="tab">Address List</a>
+              </li>
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#email_list" role="tab">Mail List</a>
               </li>
             </ul>
            
@@ -44,7 +61,11 @@
                     <!--Customer info-->
                     {% include "partials/customer_info.html" %}
               </div>
-              <div class="tab-pane fade" id="profile" role="tabpanel">
+              <div class="tab-pane fade" id="addres_list" role="tabpanel">
+                         <!--Address list-->
+                    {% include "partials/address_list.html" %}
+              </div>
+              <div class="tab-pane fade" id="email_list" role="tabpanel">
                          <!--Address list-->
                     {% include "partials/address_list.html" %}
               </div>

@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Auth',
     'tracker',
     'scranotes',
+    'Scra_inbox',
 ]
 
 MIDDLEWARE = [

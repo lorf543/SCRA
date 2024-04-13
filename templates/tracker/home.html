@@ -5,11 +5,8 @@
 {% block content %}
 
 <div class="wrapper">
-
     {% include "layout/sidebar.html" %}
-
-
-    <div class="main p-3 bg-dark">
+    <div class="main p-2 bg-dark">
         <div class="container">
             {% if messages %}
               <div class="alert-container">
@@ -22,14 +19,12 @@
               </div>
             {% endif %}
         </div>
-        <div class="pt-5">
+        <div class="">
             <h2 class="text-white">SCRA list</h2>
-
-            <div class="shadow p-3 rounded-3 bg-light">
+            <div class="shadow p-2 rounded-3 bg-light">
                 <a href="{% url 'add_customer' %}" class="btn btn-success">New entry</a>
                 {% include "layout/table.html" %}
             </div>
-
         </div>
     </div>
 </div>
