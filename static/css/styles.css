@@ -27,9 +27,10 @@ body {
 #trackerReturn  thead{
   display: none;
 }
-#tableInbox thead{
+#tableInbox  thead{
   display: none;
 }
+
 
 ::after,
 ::before {

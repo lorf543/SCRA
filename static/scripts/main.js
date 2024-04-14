@@ -18,7 +18,7 @@ new DataTable('#trackerReturn',{
   "scrollY":600,
 });
 
-new DataTable('#tableIbox',{ 
+new DataTable('#tableInbox',{ 
   "autoWidth": true,
   "scrollX":true,
   "scrollY":600,

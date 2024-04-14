@@ -104,6 +104,7 @@ def delete_customer(request, customer_id):
             request,'The account number associated to this customer has been deleted')
         return redirect('/')
 
+
 #________________________Address________________________________
 
 def address_list(request):
@@ -113,6 +114,7 @@ def address_list(request):
     context = {'address':address,'customer':customer}
     return render(request,'return/return_tracker.html',context)
 
+@login_required(login_url='login_user')
 def add_address(request, customer_id):
     customer = get_object_or_404(Account, id=customer_id)
     address_form = AddressForm()
@@ -132,7 +134,8 @@ def add_address(request, customer_id):
     context = {'address_form':address_form,'customer':customer}
     return render(request,'return/add_address.html',context)
 
-def upadate_address(request, customer_id, address_id):
+@login_required(login_url='login_user')
+def update_address(request, customer_id, address_id):
     customer = get_object_or_404(Account, id=customer_id)
     address = get_object_or_404(Address, id=address_id, customer=customer)
     
@@ -153,7 +156,8 @@ def upadate_address(request, customer_id, address_id):
         
     context = {'address_form': address_form,'customer':customer,'address':address}
     return render(request,'return/update_address.html',context)
-            
+
+@login_required(login_url='login_user')           
 def delete_address(request, address_id):
     address = get_object_or_404(Address, id=address_id)
     if request.method == "POST":

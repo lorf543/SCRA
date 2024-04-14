@@ -1,0 +1,55 @@
+<div class="container p-3">
+  <div class="d-flex">
+    <h3>Customer inbox</h3>
+    <h2 class="ms-3">
+        <a class="btn btn-outline-success d-flex"
+            href="{% url 'add_inbox' customer_id=customer.id %}">
+            +
+        </a>
+    </h2>
+  </div>
+
+  {% for inbox in customer.customer_inbox.all %}
+
+  <div  class="table-responsive">
+    <table style="width: 185%;" class="table table-hover text-center align-middle">
+      <thead>
+
+        <tr>
+          <th>#</th>
+          <th>Date received</th>
+          <th>Method Notification</th>
+          <th>Sent date</th>
+          <th>Email received</th>
+          <th>Email Sent</th>
+          <th>valid</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td scope="row">{{ forloop.counter }}</td>
+          <td>{{inbox.date_received|date:"d/m/Y"}}</td>
+          <td>{{inbox.method_notification}}</td>
+          <td>{{inbox.email_sent_date|date:"d/m/Y"}}</td>
+          <td >{{inbox.email_received}}</td>
+          <td >{{inbox.email_sent}}</td>
+          <td>{{inbox.email_sent_date|date:"m/d/Y"}}</td>
+          <td>
+            <div class="btn-group">
+                <a href="#" class="btn btn-secondary d-flex justify-content-center">
+                    <i class="lni lni-eye"></i>
+                </a>
+                <a href="{% url 'update_inbox' customer_id=customer.id inbox_id=inbox.id %}" class="btn btn-secondary d-flex justify-content-center">
+                  <i class="lni lni-pencil"></i>
+                </a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  {% endfor %}
+</div>

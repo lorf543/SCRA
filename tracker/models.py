@@ -44,7 +44,7 @@ class Account(models.Model):
         User, on_delete=models.CASCADE, related_name='second_review_candidates', blank=True, null=True)
     danial_date = models.DateField(blank=True, null=True)
     denial_note = models.TextField(blank=True, null=True)
-    denial_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custumer_dl',null=True, blank = True)
+    denial_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='costumer_dl',null=True, blank = True)
     
         # _______________________Approved_Info________________
     amount_refund = models.CharField(max_length=50, blank=True, null=True,default="N/A")
@@ -56,8 +56,8 @@ class Account(models.Model):
     
     created = models.DateTimeField(auto_now_add=True, null=True, blank = True)
     updated = models.DateTimeField(null=True, blank = True)
-    added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custumer_add', null=True, blank = True)
-    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='custumer_update',null=True, blank = True)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='costumer_add', null=True, blank = True)
+    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='costumer_update',null=True, blank = True)
     
     class Meta:
         verbose_name = 'Customer'
@@ -76,7 +76,7 @@ class Account(models.Model):
         if self.military_date and self.open_state == "Ohio":
             self.qualify = True
             
-        elif self.military_date and self.open_state == "Pensilvania":
+        elif self.military_date and self.open_state == "Pennsylvania":
             days_difference = (self.date_open_acc - self.military_date).days
             if days_difference < 30:
                 self.qualify = True
@@ -129,7 +129,7 @@ class Address(models.Model):
     
     
     class Meta:
-        verbose_name = 'Customer Addresse'
+        verbose_name = 'Customer Address'
         ordering = ['created']
         
     def __str__(self):

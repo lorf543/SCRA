@@ -31,7 +31,7 @@ class CustomerForm(forms.ModelForm):
             'date_open_acc':'Date Open Account',
             'the_way_refund':'Way the refund was made',
             'danial_date':'Denial date',
-            'method_notification':'Notefication'
+            'method_notification':'Notification'
         }
         widgets = {
             'date_refund': forms.DateInput(attrs={'type':'date',}),
@@ -52,7 +52,7 @@ class AddressForm(forms.ModelForm):
     return_note = forms.CharField(
         required=False,
         widget=forms.Textarea(
-            attrs={"rows":5, "cols":5,}))
+            attrs={"rows":5, "cols":5,"placeholder":"testing carajoasda sd "}))
         
     class Meta:
         model = Address

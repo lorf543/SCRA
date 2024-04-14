@@ -2,7 +2,7 @@
     <div class="d-flex">
       <h3>Customer Addresses</h3>
       <h2 class="ms-3 ">
-        <a class="btn btn-outline-success" href="{% url 'add_address' customer_id=customer.id %}">+</a>
+        <a class="btn btn-outline-success d-flex" href="{% url 'add_address' customer_id=customer.id %}">+</a>
       </h2>
     </div>
 
@@ -17,7 +17,7 @@
             </div>
           {% endif %}
           <div class="d-flex justify-content-around align-items-center">
-            <a class="ms-2 btn btn-outline-success" href="{% url 'upadate_address' customer_id=customer.id address_id=address.id %}">
+            <a class="ms-2 btn btn-outline-success" href="{% url 'update_address' customer_id=customer.id address_id=address.id %}">
               <i class="lni lni-pencil"></i>
             </a>  
             <p class="card-text">
