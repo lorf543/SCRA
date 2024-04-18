@@ -1,36 +1,91 @@
 {% extends "base.html" %}
 
-
-
 {% block content %}
 
-<div class="wrapper">
-    {% include "layout/sidebar.html" %}
-    <div class="main p-2 bg-dark">
-        <div class="container">
-            {% if messages %}
-              <div class="alert-container">
-                {% for message in messages %}
-                  <div class="alert alert-warning alert-dismissible fade show w-50" role="alert">
-                    <strong>{{ message }}</strong> 
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                  </div>
-                {% endfor %}
+{% include "components/navbar.html" %}
+
+<div id="layoutSidenav">
+
+{% include "components/sidebar.html" %}
+
+  <div id="layoutSidenav_content">
+
+    <div class="container py-2" style='position: absolute;'>
+        {% if messages %}
+          <div class="alert-container">
+            {% for message in messages %}
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <strong>{{ message }}</strong> 
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
               </div>
-            {% endif %}
-        </div>
-        <div class="">
-            <h2 class="text-white">SCRA list</h2>
-            <div class="shadow p-2 rounded-3 bg-light">
-                <a href="{% url 'add_customer' %}" class="btn btn-success">New entry</a>
-                {% include "layout/table.html" %}
-            </div>
-        </div>
+            {% endfor %}
+          </div>
+        {% endif %}
     </div>
+      <main>
+          <div class="container-fluid px-4">
+              <h1 class="mt-4">SCRA-Tracker</h1>
+
+              <ol class="breadcrumb mb-4">
+                  <li class="breadcrumb-item active">Dashboard</li>
+              </ol>
+              <!--Cards-->
+              <div class="row">
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-primary text-white mb-4">
+                          <div class="card-body">Primary Card</div>
+                          <div class="card-footer d-flex align-items-center justify-content-between">
+                              <a class="small text-white stretched-link" href="#">View Details</a>
+                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-warning text-white mb-4">
+                          <div class="card-body">Warning Card</div>
+                          <div class="card-footer d-flex align-items-center justify-content-between">
+                              <a class="small text-white stretched-link" href="#">View Details</a>
+                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-success text-white mb-4">
+                          <div class="card-body">Success Card</div>
+                          <div class="card-footer d-flex align-items-center justify-content-between">
+                              <a class="small text-white stretched-link" href="#">View Details</a>
+                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-xl-3 col-md-6">
+                      <div class="card bg-danger text-white mb-4">
+                          <div class="card-body">Danger Card</div>
+                          <div class="card-footer d-flex align-items-center justify-content-between">
+                              <a class="small text-white stretched-link" href="#">View Details</a>
+                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+
+              <!--main table-->
+              <div class="card mb-4">
+                  <div class="card-header">
+                      <i class="fas fa-table me-1"></i>
+                      DataTable Example
+                  </div>
+                  <div class="card-body">
+                    {% include "components/table.html" %}
+                  </div>
+              </div>
+          </div>
+      </main>
+
+    {% include "components/footer.html" %}
+  </div>
 </div>
-
-
-
 
 {% endblock content %}
 

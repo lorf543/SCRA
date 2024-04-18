@@ -2,6 +2,11 @@ from django import forms
 
 from Scra_inbox.models import Inbox
 
+from django_flatpickr.widgets import (
+    DatePickerInput,
+    DateTimePickerInput,
+    TimePickerInput,
+)
 
 from tracker.models import NOTIFICATION
 
@@ -26,18 +31,19 @@ class InboxForm(forms.ModelForm):
         widget=forms.Select(attrs={})
     )
     date_received = forms.DateField(
-        required=False,
-        localize= True,
-        widget=forms.DateInput(attrs={"type":"date"})
+        widget=forms.TextInput(attrs={'placeholder': 'End Date',"id":"test_id"}),
+        required=True
+
     )
+    
     email_sent_date = forms.DateField(
         required=False,
-        label="Sent Date",
-        localize= True,
+        localize=True,
         widget=forms.DateInput(attrs={"type":"date"})
     )
 
-    
+
+
     
     class Meta:
         model = Inbox

@@ -2,60 +2,67 @@
 
 <title>Scra {% block title %}Return{% endblock title %}</title>
 
+
 {% block content %}
 
-<div class="wrapper vh-100 bg-dark">
-  {% include "layout/sidebar.html" %}
-<div class="">
 
-  <div class="shadow p-2 mx-1 my-5 rounded-3 bg-light">
+{% include "components/navbar.html" %}
 
-    <table id="trackerReturn" class="table table-bordered text-center">
-      <h2 class="mx-1 my-1">SCRA list</h2>
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Customer name</th>
-          <th>Account number</th>
-          <th>Account street</th>
-          <th>Return letter</th>
-          <th>Return Note</th>
-          <th>Return created</th>
-          <th>Return noted</th>
-          <th>Added by</th>
-          <th>Updated by by</th>
-        </tr>
-      </thead>
-      <tbody class="text-center">
-        {% for addres in address %} {% if addres.address_status == 'Return' %}
-        <tr>
-          <td class="text-center">{{ forloop.counter }}</td>
-          <td class="text-center">
-            <a
-              class="btn btn-success"
-              href="{% url 'detail_customer' addres.customer.id %}"
-            >
-              {{addres.customer.customer_name}}
-            </a>
-          </td>
-          <td class="text-center">{{addres.customer.account_number}}</td>
-          <td class="text-start">
-            {{addres.street}} {{addres.street2}} {{addres.city}} <br />
-            {{addres.state}} {{addres.zipcode}}
-          </td>
-          <td class="text-start">{{addres.return_type}}</td>
-          <td class="text-start">{{addres.return_note}}</td>
-          <td class="text-start">{{addres.created|date:"m/d/Y"}}</td>
-          <td class="text-start">{{addres.return_note}}</td>
-          <td class="text-start">{{addres.added_by}}</td>
-          <td class="text-start">{{addres.updated_by}}</td>
-        </tr>
-        {% endif %} 
-        {% endfor %}
-      </tbody>
-    </table>
+<div id="layoutSidenav">
+{% include "components/sidebar.html" %}
+
+  <div id="layoutSidenav_content">
+      <div class="container">
+        
+    <div class="shadow p-2 mx-1 my-5 rounded-3 bg-light">
+
+      <table id="trackerReturn" style="width:200%;" class="table table-bordered text-center p-">
+        <h2 class="mx-1 my-1">SCRA list</h2>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Customer name</th>
+            <th>Account number</th>
+            <th>Account street</th>
+            <th>Return letter</th>
+            <th>Return Note</th>
+            <th>Return created</th>
+            <th>Return noted</th>
+            <th>Added by</th>
+            <th>Updated by by</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          {% for addres in address %} {% if addres.address_status == 'Return' %}
+          <tr>
+            <td class="text-center">{{ forloop.counter }}</td>
+            <td class="text-center">
+              <a
+                class="btn btn-success"
+                href="{% url 'detail_customer' addres.customer.id %}"
+              >
+                {{addres.customer.customer_name}}
+              </a>
+            </td>
+            <td class="text-center">{{addres.customer.account_number}}</td>
+            <td class="text-start">
+              {{addres.street}} {{addres.street2}} {{addres.city}} <br />
+              {{addres.state}} {{addres.zipcode}}
+            </td>
+            <td class="text-start">{{addres.return_type}}</td>
+            <td class="text-start">{{addres.return_note}}</td>
+            <td class="text-start">{{addres.created|date:"m/d/Y"}}</td>
+            <td class="text-start">{{addres.return_note}}</td>
+            <td class="text-start">{{addres.added_by}}</td>
+            <td class="text-start">{{addres.updated_by}}</td>
+          </tr>
+          {% endif %} 
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+      </div>
   </div>
-</div>
 </div>
 
 {% endblock content %}

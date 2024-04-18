@@ -1,8 +1,15 @@
 {% extends "base.html" %} 
 {% block title %}Inbox{% endblock title %} 
+
 {% block content %}
-<div class="wrapper vh-100">
-  {% include "layout/sidebar.html" %}
+
+
+{% include "components/navbar.html" %}
+
+<div id="layoutSidenav">
+{% include "components/sidebar.html" %}
+
+<div id="layoutSidenav_content">
 
   <div class="container">
     <h2 class="text-white">SCRA Inbox</h2>
@@ -12,6 +19,7 @@
           <thead>
             <tr>
               <th scope="col">Numero</th>
+              <th scope="col">Acc number</th>
               <th scope="col">Recivido</th>
               <th scope="col">Method</th>
               <th scope="col">Valid request?</th>
@@ -26,6 +34,7 @@
             {% for inbox in inboxes %}
                 <tr class="">
                     <td scope="row">{{forloop.counter}}</td>
+                    <td><a class="btn btn-success" href="{% url 'detail_customer' inbox.customer.id %}">{{inbox.customer.account_number}}</a></td>
                     <td>{{inbox.date_received|date:"m/d/Y"}}</td>
                     <td>{{inbox.method_notification}}</td>
                     <td>{{inbox.valid}}</td>
@@ -40,6 +49,7 @@
       </div>
     </div>
   </div>
+
 </div>
 
 {% endblock content %}

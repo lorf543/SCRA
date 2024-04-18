@@ -37,6 +37,7 @@
     <h2 class="py-1">Update Customer</h2>
 
     <form method="POST">
+      {{ form.media }} 
       {% csrf_token %}
       <!-- 2 column grid layout with text inputs for the first and last names -->
       <div class="row mb-2">
@@ -81,8 +82,15 @@
       <div>
         <button class="btn btn-success m-3" type="submit">Submit form</button>
       </div>
+
+      <script>
+
+      </script>
     </form>
   </div>
+
 </section>
+
+
 
 {% endblock content %}

@@ -1,11 +1,3 @@
-const hamBurger = document.querySelector(".toggle-btn");
-
-hamBurger.addEventListener("click", function () {
-  document.querySelector("#sidebar").classList.toggle("expand");
-});
-
-
-
 new DataTable('#scraList',{ 
   "autoWidth": true,
   "scrollX":true,
@@ -24,6 +16,8 @@ new DataTable('#tableInbox',{
   "scrollY":600,
 });
 
+       
+// new flatpickr("#test_id", {});
 
 //Table for SCRA candidates
 // $(document).ready(function() {
@@ -43,3 +37,21 @@ new DataTable('#tableInbox',{
 // });
 
 
+
+window.addEventListener('DOMContentLoaded', event => {
+
+  // Toggle the side navigation
+  const sidebarToggle = document.body.querySelector('#sidebarToggle');
+  if (sidebarToggle) {
+      // Uncomment Below to persist sidebar toggle between refreshes
+      // if (localStorage.getItem('sb|sidebar-toggle') === 'true') {
+      //     document.body.classList.toggle('sb-sidenav-toggled');
+      // }
+      sidebarToggle.addEventListener('click', event => {
+          event.preventDefault();
+          document.body.classList.toggle('sb-sidenav-toggled');
+          localStorage.setItem('sb|sidebar-toggle', document.body.classList.contains('sb-sidenav-toggled'));
+      });
+  }
+
+});

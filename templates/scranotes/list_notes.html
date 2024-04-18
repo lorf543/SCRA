@@ -1,9 +1,20 @@
 {% extends "base.html" %} 
-{% block content %}
-<section class="wrapper vh-100">
-  {% include "layout/sidebar.html" %}
 
-  <div class="main p-1 bg-dark">
+
+
+{% block content %}
+
+
+{% include "components/navbar.html" %}
+
+<div id="layoutSidenav">
+
+{% include "components/sidebar.html" %}
+
+
+<div id="layoutSidenav_content">
+
+  <div class="main">
     <form  class="col-sm-4 p-3 mb-3 mb-sm-0" action="{% url 'list_notes' %}" method="GET">
       <div class="input-group">
         <input
@@ -83,6 +94,9 @@
       {% endfor %}
     </div>
   </div>
+
+</div>
+
 </section>
 
 {% endblock content %}

@@ -1,42 +1,52 @@
 <div class="container p-3">
-    <div class="d-flex">
-      <h3>Customer Addresses</h3>
-      <h2 class="ms-3 ">
-        <a class="btn btn-outline-success d-flex" href="{% url 'add_address' customer_id=customer.id %}">+</a>
-      </h2>
-    </div>
+  <div class="d-flex">
+    <h3>Customer Addresses</h3>
+    <h2 class="ms-3">
+      <a
+        class="btn btn-outline-success d-flex"
+        href="{% url 'add_address' customer_id=customer.id %}"
+        >+</a
+      >
+    </h2>
+  </div>
 
-    {% for address in customer.customer_address.all %}
+  {% for address in customer.customer_address.all %}
 
-      <div class="card my-1" style="width: 45rem;">
-        <div class="card-body">
-
-          {% if address.address_status == 'Active' %}
-            <div class="d-flex align-items-center">
-              <h5 class="card-title"> Main address</h5>
-            </div>
-          {% endif %}
-          <div class="d-flex justify-content-around align-items-center">
-            <a class="ms-2 btn btn-outline-success" href="{% url 'update_address' customer_id=customer.id address_id=address.id %}">
-              <i class="lni lni-pencil"></i>
-            </a>  
-            <p class="card-text">
-              {{address.street}}, {{ address.street2}} <br/>
-              {{address.city}} {{address.city}} {{address.zipcode}}
-              
-              {% if address.address_status == 'Return' %}
-                <h2><span class="badge rounded-pill text-bg-danger">
-                  {{address.address_status}} /{{address.return_type}}
-                </span></h2>
-              {% else %}
-              <h2><span class="badge rounded-pill text-bg-success">
-                {{address.address_status}}
-              </span></h2>
-              {% endif %}
-
-          </div>
-        </div>
+  <div class="card my-1" style="width: 45rem">
+    <div class="card-body">
+      {% if address.address_status == 'Active' %}
+      <div class="d-flex align-items-center">
+        <h5 class="card-title">Main address</h5>
       </div>
+      {% endif %}
+      <div class="d-flex justify-content-around align-items-center">
+        <a
+          class="ms-2 btn btn-outline-success"
+          href="{% url 'update_address' customer_id=customer.id address_id=address.id %}"
+        >
+          <i class="fa-regular fa-pen-to-square"></i>
+        </a>
+        <p class="card-text">
+          {{address.street}}, {{ address.street2}} <br />
+          {{address.city}} {{address.city}} {{address.zipcode}} 
+          {% if address.address_status == 'Return' %}
+        </p>
 
-    {% endfor %}
+        <h2>
+          <span class="badge rounded-pill text-bg-danger">
+            {{address.address_status}} /{{address.return_type}}
+          </span>
+        </h2>
+        {% else %}
+        <h2>
+          <span class="badge rounded-pill text-bg-success">
+            {{address.address_status}}
+          </span>
+        </h2>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% endfor %}
 </div>

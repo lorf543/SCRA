@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'tracker',
     'scranotes',
     'Scra_inbox',
+    'django_flatpickr',
 ]
 
 MIDDLEWARE = [

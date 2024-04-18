@@ -20,10 +20,12 @@ def login_user(request):
         username = request.POST['username']
         password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+
         messages.success(
-                request, f'Welcome to work {user.get_full_name()}')
+                request, f'Welcome to work {user}')
 
         if user is not None:
+
             login(request, user)
             return redirect('home')
 
