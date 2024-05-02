@@ -66,7 +66,7 @@ class Account(models.Model):
         return self.customer_name
     
     @property
-    def f_date(self):
+    def f_date(self):#format the date 
         return self.military_date.strftime('%m/%d/%Y')
     
     def save(self, *args, **kwargs):

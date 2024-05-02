@@ -16,7 +16,6 @@ new DataTable('#tableInbox',{
   "scrollY":600,
 });
 
-       
 // new flatpickr("#test_id", {});
 
 //Table for SCRA candidates

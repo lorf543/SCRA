@@ -14,6 +14,7 @@ Account
 def home(request):
     customer = get_list_or_404(Account)
     context ={'customers':customer}
+    print(request.META)
     return render(request, 'tracker/home.html',context)
 
 def check_customer(request):
@@ -164,3 +165,18 @@ def delete_address(request, address_id):
         address.delete()
         return redirect('detail_customer')
     return
+
+#_______________________Letters___________________________________
+@login_required(login_url='login_user')  
+def more_information(request, customer_id):
+    customer = get_object_or_404(Account, id=customer_id)
+
+    context = {'customer': customer,}
+    return render(request,'letter/more_information.html',context)
+
+@login_required(login_url='login_user')  
+def denial_letter(request, customer_id):
+    customer = get_object_or_404(Account, id=customer_id)
+
+    context = {'customer': customer,}
+    return render(request,'letter/Denial_letter.html',context)

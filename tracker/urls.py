@@ -14,6 +14,9 @@ urlpatterns = [
     path('address-list/',views.address_list,name='address_list'),
     path('add-address/<int:customer_id>/', views.add_address, name='add_address'),
     path('update-address/<int:customer_id>/<int:address_id>/', views.update_address, name='update_address'),
+    #letters 
+    path('letters/mil/<int:customer_id>/',views.more_information,name='more_info'),
+    path('letters/denial/<int:customer_id>/',views.denial_letter,name='denial_letter'),
 
 ]
 

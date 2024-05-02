@@ -4,22 +4,26 @@
      <div class="d-flex justify-content-between pt-2">
          <div class="col-6">
               <div class="row">
-                   <div class="col-6 text-muted d-flex align-items-center gap-1">
-                    Account number  
-                         <a class="ms-2 btn btn-outline-success d-flex align-items-center" href="{% url 'update_customer' customer_id=customer.id %}">
-                              <i class="fa-regular fa-pen-to-square"></i>
-                         </a>
-                         <button type="button" class="btn btn-outline-danger d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal">
-                              <i class="fa-regular fa-square-minus"></i>
-                         </button>
-                    </div>
+
+                   <div class="col-6 text-muted d-flex ">Account
+                         <div class="d-flex gap-1">
+                              <a class="ms-2 btn btn-outline-success d-flex align-items-center" href="{% url 'update_customer' customer_id=customer.id %}">
+                                   <i class="fa-regular fa-pen-to-square"></i>
+                              </a>
+                               <button type="button" class="btn btn-outline-danger d-flex align-items-center" data-bs-toggle="modal" data-bs-target="#deleteCustomerModal">
+                                   <i class="fa-regular fa-square-minus"></i>
+                              </button>
+                         </div>
+                   </div>
                    <div class="col-6">{{customer.account_number}}</div>
                    <hr class="mt-2">
                    <div class="col-6 text-muted">Loan type</div>
                    <div class="col-6">{{customer.loan_type}}</div>
+
                    <hr class="mt-2">
                    <div class="col-6 text-muted">Loan type</div>
                    <div class="col-6">{{customer.customer_name}}</div>
+
                    <hr class="mt-2">
                    <div class="col-6 text-muted">Open State</div>
                    <div class="col-6">{{customer.open_state}}</div>

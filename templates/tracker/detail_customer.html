@@ -23,7 +23,8 @@
       {% endif %}
   </div>
   
-     <a class="d-flex mb-2 align-items-center justify-content-center  btn btn-outline-secondary shadow btn-sm" style="width: 18rem;" href="/">
+     <a class="d-flex mb-2 align-items-center justify-content-center  btn btn-outline-secondary shadow btn-sm" style="width: 18rem;" 
+          href="{{request.META.HTTP_REFERER}}">
           <i class="h1 lni lni-arrow-left-circle"></i>
           <h3 class="px-3">Back to tracker</h3>
      </a>
@@ -59,6 +60,18 @@
               <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#email_list" role="tab">Mail List</a>
               </li>
+              <li class="nav-item" role="presentation">
+                <div class="btn-group">
+                  <button type="button" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    Generate letters
+                  </button>
+                  <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a href="{% url 'more_info' customer.id %}" class="dropdown-item" target="_blanck" >More Info Letter</a></li>
+                    <li><a href="{% url 'denial_letter' customer.id %}" class="dropdown-item"  target="_blanck" >Denial Letter</a></li>
+                    <li><button class="dropdown-item" type="button">Approval Letter</button></li>
+                  </ul>
+                </div>
+              </li>
             </ul>
            
             <div class="tab-content" id="myTabContent">
@@ -75,7 +88,6 @@
                     {% include "partials/email_list.html" %}
               </div>
             </div>
-           
           </ul>
       </div>
   

@@ -51,10 +51,17 @@
       <div class="col-sm-4 col-md-4 mb-3 mb-sm-0 py-1" id="search-results">
         <div class="card">
           <div class="card-body">
-            <h5 class="card-title fw-bold h3">{{note.note_title}}</h5>
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="card-title fw-bold h3">{{note.note_title}}</h5>
+              </div>
+              <div>
+                <button  id="noteText"  data-note="{{note.note}}"  class="btn btn-success copy-note"  >Copy</button>
+              </div>
+            </div>
             <hr />
             <p class="card-text">{{note.note|truncatechars:170}}</p>
-            <a href="{% url 'update_notes' note.id %}" class="btn btn-success">
+            <a  href="{% url 'update_notes' note.id %}" class="btn btn-success">
               Update
             </a>
             <button
@@ -64,6 +71,8 @@
           </div>
         </div>
       </div>
+
+
       <!-- Modal -->
       <div class="modal fade" id="deleteModal"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -94,9 +103,35 @@
       {% endfor %}
     </div>
   </div>
-
 </div>
 
 </section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var copyButtons = document.querySelectorAll('.copy-note');
+
+    copyButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var noteContent = this.getAttribute('data-note');
+
+        // Create a temporary input element
+        var tempInput = document.createElement('textarea');
+        tempInput.value = noteContent;
+        document.body.appendChild(tempInput);
+
+        // Select and copy the content
+        tempInput.select();
+        document.execCommand('copy');
+
+        // Remove the temporary input element
+        document.body.removeChild(tempInput);
+
+        // You can provide some visual feedback here (e.g., tooltip, alert)
+        alert('Note copied to clipboard!');
+      });
+    });
+  });
+</script>
 
 {% endblock content %}

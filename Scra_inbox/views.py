@@ -54,4 +54,6 @@ def update_inbox(request, customer_id, inbox_id):
         
     context = {'inbox_form':inbox_form,}
     return render(request,'scrainbox/update_inbox.html',context)
-    
+
+
+

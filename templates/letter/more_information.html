@@ -1,0 +1,67 @@
+{% extends "base.html" %} 
+
+
+{% block content %}
+
+
+<style>
+    .container-size{
+        height: 95vh;
+        width: 850px;
+    }
+</style>
+<div class="d-flex justify-content-evenly">
+    <button class="btn btn-success my-2" type="button" onclick="generatePDF();">
+        Descargar PDF
+    </button>
+    <p></p>
+</div>
+<div class="container mt-5 pb-5">
+
+
+  <div class="container shadow card container-size ">
+    <div class="container" id="pageprint">
+      <ul class="pt-5">
+        <li>{{customer.customer_name}}</li>
+        <li>{{customer.account_number}}</li>
+        {% for address in customer.customer_address.all %}
+            <li>{{address.street}}, {% if address.street2 %} {{address.street2}} {% endif %}</li>
+            <li>{{address.city}}, {{address.state}} {{address.zipcode}}</li>
+        {% endfor %}
+
+        <h1>More information letter</h1>
+        
+      </ul>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+
+  <!-- Script para generar el PDF -->
+  <script>
+    function generatePDF() {
+      const element = document.getElementById("pageprint");
+      var options = {
+        margin: 8,
+        filename: "documento.pdf",
+        image: { type: "jpeg", quality: 0.8 },
+        html2canvas: {
+          scale: 4, // Ajusta según tus necesidades
+          letterRendering: true,
+        },
+        jsPDF: {
+          unit: "mm",
+          format: "a4", // Cambia a "a1", "a2", "a3", etc. si es necesario
+          orientation: "portrait", // O "landscape" si prefieres
+        },
+      };
+
+      const pdf = html2pdf().from(element).set(options);
+
+      // Abre el PDF en una nueva ventana o pestaña del navegador
+      pdf.outputPdf("dataurlnewwindow");
+    }
+  </script>
+
+  {% endblock content %}
+</div>
