@@ -17,6 +17,7 @@ urlpatterns = [
     #letters 
     path('letters/mil/<int:customer_id>/',views.more_information,name='more_info'),
     path('letters/denial/<int:customer_id>/',views.denial_letter,name='denial_letter'),
+    path('letters/approval/<int:customer_id>/',views.approval_letter,name='approval_letter'),
 
 ]
 

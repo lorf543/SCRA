@@ -15,7 +15,7 @@
   {% endif %}
 </div>
 
-<section class="pt-5">
+<section class="py-4">
   <div class="container p-3 border shadow bg-white rounded">
     <a
       class="d-flex mb-2 align-items-center justify-content-center btn btn-outline-secondary shadow btn-sm"
@@ -61,71 +61,78 @@
       </div>
 
       <div class="row mb-4">
-        <div class="col-4 col-md-4">
+        <div class="col-4 col-md-2">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.method_notification|as_crispy_field}}
           </div>
         </div>
-        <div class="col-6 col-md-4">
+        <div class="col-6 col-md-2">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.military_date|as_crispy_field}}
           </div>
         </div>
-        <div class="col-6 col-md-4">
+        <div class="col-6 col-md-2">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.date_open_acc|as_crispy_field}}
           </div>
         </div>
-        <div class="col-6 col-md-4">
+        <div class="col-6 col-md-2">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.date_request|as_crispy_field}}
           </div>
         </div>
       </div>
       <hr />
+      <h2 class="py-1">Denial Date</h2>
       <div class="row mb-4">
-        <div class="col-4">
+        <div class="col-6">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.danial_date|as_crispy_field}}
           </div>
         </div>
       </div>
 
+      <hr />
+      <h2 class="py-1">Approval Information</h2>
       {% if customer.qualify == True %}
+
       <div class="row mb-4">
-        <div class="col-2">
+        <div class="col-5 col-md-2">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.amount_refund|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-5 col-md-2">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.the_way_refund|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-6 col-md-2">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.date_refund|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+      </div>
+
+      <div class="row mb-4">
+        <div class="col-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.where_fees|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4">
           <div data-mdb-input-init class="form-outline">
-            {{customer_form.where_fees|as_crispy_field}}
+            {{customer_form.Interest_Rate|as_crispy_field}}
           </div>
         </div>
-        <div class="col-2">
+        <div class="col-4">
           <div data-mdb-input-init class="form-outline">
-            {{customer_form.where_fees|as_crispy_field}}
+            {{customer_form.Fees|as_crispy_field}}
           </div>
         </div>
       </div>
-      {% endif %}
 
+      {% endif %}
       <!-- Submit button -->
       <div>
         <button class="btn btn-success m-3" type="submit">Submit form</button>

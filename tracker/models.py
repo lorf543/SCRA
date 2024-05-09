@@ -33,6 +33,7 @@ class Account(models.Model):
         auto_now=False, auto_now_add=False, blank=True, null=True)
     qualify = models.BooleanField()
     status_notes = models.TextField(blank=True, null=True)
+    
         #_____________________________More Info Letter_______________________________
     first_review = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='first_review_candidates', blank=True, null=True)
@@ -53,6 +54,8 @@ class Account(models.Model):
     where_fees = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     where_waived = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     waive_interest = models.CharField(max_length=50, blank=True, null=True,default="N/A")
+    Interest_Rate = models.CharField(max_length=50, blank=True, null=True,default="N/A")
+    Fees = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     
     created = models.DateTimeField(auto_now_add=True, null=True, blank = True)
     updated = models.DateTimeField(null=True, blank = True)

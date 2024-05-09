@@ -25,7 +25,11 @@
             <li>{{address.city}}, {{address.state}} {{address.zipcode}}</li>
         {% endfor %}
 
-        <h1>Denial Letter</h1>
+        <h1>Approval</h1>
+        <p> 
+            customer Interest from {{customer.Interest_Rate}}% to 6% and {{customer.Fees}}% to 6% has been forgiven<br>
+            from the date open account {{customer.date_open_acc|date:'m/d/Y'}}
+        </p>
         
       </ul>
     </div>

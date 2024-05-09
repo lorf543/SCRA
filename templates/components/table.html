@@ -1,4 +1,4 @@
-<table id="scraList" class="table table-bordered text-center">
+<table id="scraList" class="table table-bordered text-center" >
   <a class="btn btn-success" href="{% url 'add_customer' %}">New entry</a>
   <thead>
     <tr>
@@ -29,9 +29,10 @@
     </tr>
   </thead>
   
-  <tbody class="text-center">
+  <tbody class="text-center"  >
     {% for customer in customers %}
-    <tr>
+    
+    <tr class="customer-row">
       <td class="text-center">{{ forloop.counter }}</td>
       <td class="text-center">
         <a

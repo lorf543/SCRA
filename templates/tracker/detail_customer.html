@@ -1,4 +1,5 @@
 {% extends "base.html" %} 
+{% load crispy_forms_tags %} 
 
 
 {% block content %}
@@ -68,7 +69,7 @@
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li><a href="{% url 'more_info' customer.id %}" class="dropdown-item" target="_blanck" >More Info Letter</a></li>
                     <li><a href="{% url 'denial_letter' customer.id %}" class="dropdown-item"  target="_blanck" >Denial Letter</a></li>
-                    <li><button class="dropdown-item" type="button">Approval Letter</button></li>
+                    <li><a href="{% url 'approval_letter' customer.id %}" class="dropdown-item"  target="_blanck" >Approval Letter</a></li>
                   </ul>
                 </div>
               </li>
@@ -90,11 +91,7 @@
             </div>
           </ul>
       </div>
-  
-
-
   </div>
-
 
 </div>
 

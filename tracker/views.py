@@ -14,7 +14,6 @@ Account
 def home(request):
     customer = get_list_or_404(Account)
     context ={'customers':customer}
-    print(request.META)
     return render(request, 'tracker/home.html',context)
 
 def check_customer(request):
@@ -83,7 +82,7 @@ def update_customer(request,customer_id):
             customer.updated = timezone.now().date()
             dl_note(customer,request)
             customer.save()
-        return redirect('/')
+        return redirect('detail_customer',customer.id)
     else:
         customer_form = CustomerForm(instance=customer)
             
@@ -93,7 +92,9 @@ def update_customer(request,customer_id):
 @login_required(login_url='login_user')
 def detail_customer(request, customer_id):
     customer = get_object_or_404(Account, id=customer_id)
-    context ={'customer':customer}
+    
+
+    context ={'customer':customer,}
     return render(request,'tracker/detail_customer.html',context)
 
 @login_required(login_url='login_user')
@@ -180,3 +181,10 @@ def denial_letter(request, customer_id):
 
     context = {'customer': customer,}
     return render(request,'letter/Denial_letter.html',context)
+
+@login_required(login_url='login_user')
+def approval_letter(request, customer_id):
+    customer = get_object_or_404(Account, id=customer_id)
+
+    context = {'customer': customer,}
+    return render(request,'letter/approval_letter.html',context)
