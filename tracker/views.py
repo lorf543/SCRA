@@ -4,16 +4,56 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.utils import timezone
 
+from openpyxl import Workbook
+
 from .models import Account,Address
 from .forms import CustomerForm,AddressForm
-Account
+from .filters import CustomerFilters
 # Create your views here.
 
+@login_required(login_url='login_user')
+def export_data(request):
+    queryset = Account.objects.all()  # Customize this queryset as needed
+
+    # Create a new Workbook
+    wb = Workbook()
+    ws = wb.active
+
+    # Add headers
+    headers = ['Name', 'Loan Type', 'Open state']  # Customize headers as needed
+    ws.append(headers)
+
+    # Add data rows
+    for item in queryset:
+        data_row = [item.customer_name, item.loan_type, item.open_state]  # Customize fields as needed
+        ws.append(data_row)
+
+    # Save the workbook to a BytesIO object
+    from io import BytesIO
+    output = BytesIO()
+    wb.save(output)
+    output.seek(0)
+
+    # Prepare HTTP response with Excel file
+    response = HttpResponse(
+        output.getvalue(),
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+    )
+    response['Content-Disposition'] = 'attachment; filename="exported_data.xlsx"'
+
+    return response
 
 @login_required(login_url='login_user')
 def home(request):
-    customer = get_list_or_404(Account)
-    context ={'customers':customer}
+    #customer = get_list_or_404(Account)
+
+    filter = CustomerFilters(
+        request.GET, queryset=Account.objects.all()
+    )
+    context ={
+    'customers':filter.qs,
+    'filter':filter
+    }
     return render(request, 'tracker/home.html',context)
 
 def check_customer(request):

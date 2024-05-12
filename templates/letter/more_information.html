@@ -25,8 +25,10 @@
         <li>{{customer.customer_name}}</li>
         <li>{{customer.account_number}}</li>
         {% for address in customer.customer_address.all %}
+          {% if address.address_status ==  'Active' %}
             <li>{{address.street}}, {% if address.street2 %} {{address.street2}} {% endif %}</li>
             <li>{{address.city}}, {{address.state}} {{address.zipcode}}</li>
+          {% endif %}
         {% endfor %}
 
         <h1>More information letter</h1>

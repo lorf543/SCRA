@@ -69,6 +69,7 @@ window.addEventListener('DOMContentLoaded', event => {
         row.classList.add('selected');
       });
     });
+    
   
 });
 

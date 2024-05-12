@@ -1,12 +1,15 @@
 <table id="scraList" class="table table-bordered text-center" >
-  <a class="btn btn-success" href="{% url 'add_customer' %}">New entry</a>
+  <div class="d-flex justify-content-between">
+    <a class="btn btn-success" href="{% url 'add_customer' %}">New entry</a>
+    <a class="btn btn-success" href="{% url 'export_data' %}">Export Data to Excel</a> 
+  </div>
   <thead>
     <tr>
       <th>#</th>
       <th>Name</th>
       <th>Loan Type</th>
-      <th>Open state</th>
-      <th>Loan Type</th>
+      <th>Account number</th>
+      <th>Estate</th>
       <th>Acc status</th>
       <th>Date request</th>
       <th>Method notification</th>
@@ -42,9 +45,9 @@
           
         </a>
       </td>
-      <td class="text-center">{{customer.open_state}}</td>
-      <td class="text-center">{{customer.account_number}}</td>
       <td class="text-center">{{customer.loan_type}}</td>
+      <td class="text-center">{{customer.account_number}}</td>
+      <td class="text-center">{{customer.open_state}}</td>
       <td class="text-center">{{customer.acc_status}}</td>
       <td class="text-center">{{customer.date_request|date:"m/d/Y"}}</td>
       <td class="text-center">{{customer.method_notification}}</td>

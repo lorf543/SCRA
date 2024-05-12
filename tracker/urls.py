@@ -19,6 +19,8 @@ urlpatterns = [
     path('letters/denial/<int:customer_id>/',views.denial_letter,name='denial_letter'),
     path('letters/approval/<int:customer_id>/',views.approval_letter,name='approval_letter'),
 
+    path('export/',views.export_data, name='export_data'),
+
 ]
 
 htmx_urlpatterns = [

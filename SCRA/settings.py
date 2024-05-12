@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'scranotes',
     'Scra_inbox',
     'django_flatpickr',
+    'django_filters',
+    'import_export',
 ]
 
 MIDDLEWARE = [
