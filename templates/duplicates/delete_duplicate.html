@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+    <div class="container pt-5 mt-5">
+        <form method="post">
+            <div class="card" style="width: 40rem;">
+                <div class="card-body">
+                    <p class="card-title fw-bold fs-2">Delete for all eternity?</p>
+                    <p class='card-text'>{{duplicate.duplicate_note}}</p>
+                    <p class="card-title">Are you sure want to <b>permanently delete</b> this entry?</p>
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-danger" value="Yes Delete!">
+                    <a class="btn btn-success" href="{{request.META.HTTP_REFERER}}">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+{% endblock content %}

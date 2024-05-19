@@ -38,6 +38,9 @@ fieldset legend {
 #tableInbox  thead{
   display: none;
 }
+#Pendinglist  thead{
+  display: none;
+}
 
 
 ::after,

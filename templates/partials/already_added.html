@@ -1,6 +1,18 @@
 
 
 <div class="already-add " id="customer_error">
-    <p>Already added</p>
-    <a href="#" class="btn btn-success btn-sm">Add duplicate entry?</a>
+    <p>This account is already added.</p>
+    <a href="#" id='close' class="btn btn-danger btn-sm">Close</a>
 </div>
+
+
+
+<script>
+
+    let btnClose = document.getElementById('close');
+    btnClose.addEventListener('click',function(){
+      document.getElementById('customer_error').style.display = 'none';
+    }); 
+   
+
+</script>

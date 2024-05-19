@@ -33,8 +33,10 @@ class Account(models.Model):
         auto_now=False, auto_now_add=False, blank=True, null=True)
     qualify = models.BooleanField()
     status_notes = models.TextField(blank=True, null=True)
+    veteran = models.BooleanField(default=False, blank=True, null=True)
+
     
-        #_____________________________More Info Letter_______________________________
+    #_____________________________More Info Letter_______________________________
     first_review = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='first_review_candidates', blank=True, null=True)
     date_mil = models.DateField(blank=True, null=True)
@@ -61,7 +63,15 @@ class Account(models.Model):
     updated = models.DateTimeField(null=True, blank = True)
     added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='costumer_add', null=True, blank = True)
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='costumer_update',null=True, blank = True)
-    
+
+    #_________________________________Pending_info______________________
+    pending = models.CharField(max_length=50,choices=PENDING,null=True, blank=True)
+    reason = models.CharField(max_length=50,null=True, blank=True)
+    resolve_note = models.TextField(null=True, blank=True)
+    resolve_date = models.DateField(null=True, blank=True)
+    pending_date = models.DateField(null=True, blank=True)
+    pending_note = models.TextField(null=True, blank=True)
+
     class Meta:
         verbose_name = 'Customer'
         
@@ -85,22 +95,13 @@ class Account(models.Model):
                 self.qualify = True
         
         elif self.military_date:
-            self.status_notes = f"""
-                    SCRA account review. we have check form military
-                    date {self.military_date.strftime('%m/%d/%Y')}. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.
-                    account does not qualify for SCRA benefits. 
-                    issuing a more information letter.
+            self.status_notes = f""" SCRA account review. we have check form military date {self.military_date.strftime('%m/%d/%Y')}. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. account does not qualify for SCRA benefits. issuing a more information letter.
                 """
             if self.military_date >= self.date_open_acc:
                 self.qualify = True
         else:
-            self.status_notes =  f"""
-                    SCRA account review. we have check form military
-                    date N/A. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}.
-                    account does not qualify for SCRA benefits. 
-                    issuing a more information letter.
+            self.status_notes =  f"""SCRA account review. we have check form military date N/A. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. account does not qualify for SCRA benefits. issuing a more information letter.
                 """
-
             self.qualify = False
             
         super(Account, self).save(*args, **kwargs)  
@@ -138,6 +139,20 @@ class Address(models.Model):
     def __str__(self):
         return self.customer.customer_name +" "+ self.street
     
+class Duplicates(models.Model):
+    customer = models.ForeignKey(Account, related_name="customer_Duplicates", on_delete=models.CASCADE,null=True, blank = True)
+    duplicate_note = models.TextField(null=True, blank=True)
+    veteran = models.BooleanField(default=False, blank=True, null=True)
     
+    created = models.DateField(auto_now_add=True, null=True, blank = True)
+    updated = models.DateField(null=True, blank = True)
+    added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Duplicates_add', null=True, blank = True)
+    updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Duplicates_update',null=True, blank = True)
+
+    def __str__(self):
+        return self.customer.customer_name
     
+    class meta:
+        verbose_name_plural = 'Duplicates'
+        ordering = ['created']
     

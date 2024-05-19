@@ -1,7 +1,14 @@
 from django import forms
-from django_flatpickr.widgets import DatePickerInput, TimePickerInput, DateTimePickerInput
+from .models import Account,Address, Duplicates
 
-from .models import Account,Address
+
+
+class DuplicatesForm(forms.ModelForm):
+    
+    class Meta:
+        model = Duplicates
+        fields = ["duplicate_note",]
+    
 
 
 class CustomerForm(forms.ModelForm):
@@ -17,7 +24,14 @@ class CustomerForm(forms.ModelForm):
             'hx-triger':'keyup delay:2s',
             'hx-target':'#customer_error'
         })
-    )    
+    )
+
+    veteran = forms.BooleanField(
+        required=False,
+        widget=forms.CheckboxInput(
+            attrs={}
+        )
+    )
 
     class Meta:
         model = Account

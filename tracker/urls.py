@@ -19,8 +19,15 @@ urlpatterns = [
     path('letters/denial/<int:customer_id>/',views.denial_letter,name='denial_letter'),
     path('letters/approval/<int:customer_id>/',views.approval_letter,name='approval_letter'),
 
-    path('export/',views.export_data, name='export_data'),
+    #Duplicates
+    path('duplicates/add/<int:customer_id>/',views.add_duplicate, name='add_duplicate'),
+    path('duplicates/update/<int:customer_id>/<int:duplicate_id>/',views.update_duplicate, name='update_duplicate'),
+    path('duplicates/delete/<int:customer_id>/<int:duplicate_id>/',views.delete_duplicate, name='delete_duplicate'),
 
+    #pending
+    #path('pending/list/',views.list_pending, name='list_pending'),
+
+    path('export/',views.export_data, name='export_data'),
 ]
 
 htmx_urlpatterns = [

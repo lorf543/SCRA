@@ -15,6 +15,11 @@ new DataTable('#tableInbox',{
   "scrollX":true,
   "scrollY":600,
 });
+new DataTable('#Pendinglist',{ 
+  "autoWidth": true,
+  "scrollX":true,
+  "scrollY":600,
+});
 
 // new flatpickr("#test_id", {});
 
@@ -70,7 +75,6 @@ window.addEventListener('DOMContentLoaded', event => {
       });
     });
     
-  
 });
 
 

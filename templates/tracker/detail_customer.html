@@ -25,7 +25,7 @@
   </div>
   
      <a class="d-flex mb-2 align-items-center justify-content-center  btn btn-outline-secondary shadow btn-sm" style="width: 18rem;" 
-          href="{{request.META.HTTP_REFERER}}">
+          href="/">
           <i class="h1 lni lni-arrow-left-circle"></i>
           <h3 class="px-3">Back to tracker</h3>
      </a>
@@ -40,7 +40,7 @@
             </div>
             <div class="row">
                 <h3>Added by</h3>
-                <h6 class="text-secondary" >Eduardo Sanchez</h6>
+                <h6 class="text-secondary">Eduardo Sanchez</h6>
             </div>
             <div class="row">
                 <h3>Status</h3>
@@ -73,20 +73,26 @@
                   </ul>
                 </div>
               </li>
+
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#duplicates_list" role="tab">Duplicate list</a>
+              </li>
+
             </ul>
+            
            
             <div class="tab-content" id="myTabContent">
               <div class="tab-pane fade show active" id="home" role="tabpanel">
-                    <!--Customer info-->
-                    {% include "partials/customer_info.html" %}
+                {% include "partials/customer_info.html" %}
               </div>
               <div class="tab-pane fade" id="addres_list" role="tabpanel">
-                         <!--Address list-->
-                    {% include "partials/address_list.html" %}
+                {% include "partials/address_list.html" %}
               </div>
               <div class="tab-pane fade" id="email_list" role="tabpanel">
-                         <!--Address list-->
-                    {% include "partials/email_list.html" %}
+                {% include "partials/email_list.html" %}
+              </div>
+              <div class="tab-pane fade" id="duplicates_list" role="tabpanel">
+                {% include "partials/duplicates.html" %}
               </div>
             </div>
           </ul>

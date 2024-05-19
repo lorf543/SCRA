@@ -6,8 +6,8 @@ from django.utils import timezone
 
 from openpyxl import Workbook
 
-from .models import Account,Address
-from .forms import CustomerForm,AddressForm
+from .models import Account,Address,Duplicates
+from .forms import CustomerForm,AddressForm,DuplicatesForm
 from .filters import CustomerFilters
 # Create your views here.
 
@@ -20,12 +20,14 @@ def export_data(request):
     ws = wb.active
 
     # Add headers
-    headers = ['Name', 'Loan Type', 'Open state']  # Customize headers as needed
+    headers = [ 'customer_name','account_number','loan_type', 'open_state','acc_status','date_request','method_notification','date_open_acc','military_date','qualify','status_notes','first_review'
+        ]  # Customize headers as needed
     ws.append(headers)
 
     # Add data rows
     for item in queryset:
-        data_row = [item.customer_name, item.loan_type, item.open_state]  # Customize fields as needed
+        data_row = [item.customer_name, item.account_number, item.loan_type, item.open_state, item.acc_status, item.date_request,item.method_notification,item.date_open_acc,item.military_date, item.qualify,item.status_notes,item.first_review
+        ]  # Customize fields as needed
         ws.append(data_row)
 
     # Save the workbook to a BytesIO object
@@ -46,7 +48,6 @@ def export_data(request):
 @login_required(login_url='login_user')
 def home(request):
     #customer = get_list_or_404(Account)
-
     filter = CustomerFilters(
         request.GET, queryset=Account.objects.all()
     )
@@ -63,7 +64,7 @@ def check_customer(request):
         
 @login_required(login_url='login_user')
 def add_customer(request):
-    
+    customer = Account.objects.all()
     if request.method == 'POST':
         customer_form = CustomerForm(request.POST)
         address_form = AddressForm(request.POST)
@@ -87,7 +88,7 @@ def add_customer(request):
             
 
             
-    context = {'customer_form' : customer_form, 'address_form':address_form}
+    context = {'customer_form' : customer_form, 'address_form':address_form,'customer':customer}
     return render(request,'tracker/add_customer.html',context)
 
 def dl_note(customer,request):
@@ -132,7 +133,6 @@ def update_customer(request,customer_id):
 @login_required(login_url='login_user')
 def detail_customer(request, customer_id):
     customer = get_object_or_404(Account, id=customer_id)
-    
 
     context ={'customer':customer,}
     return render(request,'tracker/detail_customer.html',context)
@@ -146,7 +146,6 @@ def delete_customer(request, customer_id):
             request,'The account number associated to this customer has been deleted')
         return redirect('/')
 
-
 #________________________Address________________________________
 
 def address_list(request):
@@ -159,7 +158,6 @@ def address_list(request):
 @login_required(login_url='login_user')
 def add_address(request, customer_id):
     customer = get_object_or_404(Account, id=customer_id)
-    address_form = AddressForm()
     
     if request.method == 'POST':
         address_form = AddressForm(request.POST)
@@ -228,3 +226,64 @@ def approval_letter(request, customer_id):
 
     context = {'customer': customer,}
     return render(request,'letter/approval_letter.html',context)
+
+#________________________Duplicates____________________
+
+@login_required(login_url='login_user')
+def add_duplicate(request,customer_id):
+    customer = get_object_or_404(Account, id=customer_id)
+
+    if request.method == 'POST':
+        form_duplicates = DuplicatesForm(request.POST)
+
+        if form_duplicates.is_valid():
+            duplicates = form_duplicates.save(commit=False)
+            duplicates.customer = customer
+            duplicates.added_by = request.user
+            duplicates.save()
+            return redirect('detail_customer', customer.id)
+    else:
+        form_duplicates = DuplicatesForm()
+
+    context = {'form_duplicates':form_duplicates}
+    return render(request,'duplicates/add_duplicate.html',context)
+
+@login_required(login_url='login_user')
+def update_duplicate(request,customer_id,duplicate_id):
+    customer = get_object_or_404(Account, id=customer_id)
+    duplicate = get_object_or_404(Duplicates, id=duplicate_id, customer=customer)
+
+    if request.method == 'POST':
+        form_duplicates = DuplicatesForm(request.POST,instance=duplicate)
+
+        if form_duplicates.is_valid():
+            duplicates = form_duplicates.save(commit=False)
+            duplicates.updated_by = request.user
+            duplicates.update = timezone.now().date()
+            duplicates.save()
+            messages.success(
+                request,'the duplicated note has been updated'
+            )   
+        return redirect('detail_customer', customer.id)
+    else:
+        form_duplicates = DuplicatesForm(instance=duplicate)
+
+    context = {'form_duplicates':form_duplicates,'customer':customer,'duplicate':duplicate}
+    return render(request,'duplicates/add_duplicate.html',context)
+
+@login_required(login_url='login_user')
+def delete_duplicate(request,customer_id,duplicate_id):
+    customer = get_object_or_404(Account, id=customer_id)
+    duplicate = get_object_or_404(Duplicates, id=duplicate_id, customer=customer)
+
+    if request.method=='POST':
+        duplicate.delete()
+        messages.success(
+            request,'The note duplicated has been deleted!'
+        )
+        return redirect('detail_customer', customer.id)
+
+    context = {'customer':customer, 'duplicate':duplicate}
+    return render(request,'duplicates/delete_duplicate.html',context)
+
+#________________________Pending__________________

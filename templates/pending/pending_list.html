@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+<title>Scra {% block title %}Return{% endblock title %}</title>
+
+
+{% block content %}
+
+
+{% include "components/navbar.html" %}
+
+<div id="layoutSidenav">
+{% include "components/sidebar.html" %}
+
+  <div id="layoutSidenav_content">
+      <div class="container">
+        
+    <div class="shadow p-2 mx-1 my-5 rounded-3 bg-light">
+
+      <table id="Pendinglist" style="width:200%;" class="table table-bordered text-center p-">
+        <h2 class="mx-1 my-1">Pending List</h2>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Customer name</th>
+            <th>Account number</th>
+            <th>Account street</th>
+            <th>Return letter</th>
+            <th>Return Note</th>
+            <th>Return created</th>
+            <th>Return noted</th>
+            <th>Added by</th>
+            <th>Updated by by</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+            {% for pen in pending  %}
+                <tr>
+                    <td class="text-center">{{ forloop.counter }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+      </div>
+  </div>
+</div>
+
+{% endblock content %}
+

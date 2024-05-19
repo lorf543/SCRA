@@ -35,7 +35,7 @@
   <tbody class="text-center"  >
     {% for customer in customers %}
     
-    <tr class="customer-row">
+    <tr class="customer-row {% if customer.veteran%} bg-danger {% endif %}">
       <td class="text-center">{{ forloop.counter }}</td>
       <td class="text-center">
         <a

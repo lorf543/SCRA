@@ -1,0 +1,59 @@
+<div class="container p-3">
+  <div class="d-flex">
+    <h3>Add duplicate</h3>
+    <h2 class="ms-3">
+      <a
+        class="btn btn-outline-success d-flex"
+        href="{% url 'add_duplicate' customer_id=customer.id %}"
+      >
+        +
+      </a>
+    </h2>
+  </div>
+
+  <div class="table-responsive">
+      <table
+      style="width: 100%"
+      class="table table-hover align-middle"
+      >
+      <thead>
+          <tr>
+              <th>#</th>
+              <th>Note</th>
+              <th>Created</th>
+              <th>User</th>
+              <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+          {% for duplicate in customer.customer_Duplicates.all %}
+        <tr>
+          <td scope="row">{{ forloop.counter }}</td>
+          <td>{{duplicate.duplicate_note}}</td>
+          <td>{{duplicate.created|date:'m/d/Y'}}</td>
+          <td>{{duplicate.added_by}}</td>
+          <td>
+            <div class="btn-group">
+              <a
+                href="{% url 'update_duplicate' customer_id=customer.id duplicate_id=duplicate.id  %}"
+                class="btn btn-success d-flex justify-content-center"
+              >
+                <i class="fa-solid fa-pen-to-square"></i>
+              </a>
+            <a
+                href="{% url 'delete_duplicate' customer.id duplicate.id %}"
+                class="btn btn-danger d-flex justify-content-center"
+              >
+              <i class="fa-regular fa-square-minus"></i>
+            </a>
+
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+

@@ -100,3 +100,8 @@ NOTIFICATION = (
     ('RPA', 'RPA'),
 )
 
+PENDING  = (
+    ('pending','pending'),
+    ('resolve','resolve'),
+)
+
