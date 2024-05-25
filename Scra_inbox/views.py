@@ -24,6 +24,7 @@ def add_inbox(request, customer_id):
        inbox_form.is_valid()
        inbox = inbox_form.save(commit=False)
        inbox.customer = customer
+       inbox.added_by = request.user
        inbox.save()
        messages.success(request,'New inbox has been added')
        return redirect('detail_customer', customer.id)

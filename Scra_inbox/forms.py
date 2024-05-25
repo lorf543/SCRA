@@ -30,11 +30,6 @@ class InboxForm(forms.ModelForm):
         label='Notification',
         widget=forms.Select(attrs={})
     )
-    date_received = forms.DateField(
-        widget=forms.TextInput(attrs={'placeholder': 'End Date',"id":"test_id"}),
-        required=True
-
-    )
     
     email_sent_date = forms.DateField(
         required=False,
@@ -42,11 +37,13 @@ class InboxForm(forms.ModelForm):
         widget=forms.DateInput(attrs={"type":"date"})
     )
 
-
-
-    
+ 
     class Meta:
         model = Inbox
         fields = ["method_notification","date_received",
-                "email_received","email_sent","email_sent_date","valid"]
-    
+        "email_received","email_sent","email_sent_date","valid"]
+
+        widgets = {
+        'date_received': forms.DateInput(attrs={'type':'date',}),
+
+        }

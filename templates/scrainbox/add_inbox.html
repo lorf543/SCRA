@@ -40,23 +40,23 @@
       {% csrf_token %}
       <!-- 2 column grid layout with text inputs for the first and last names -->
       <div class="row mb-2">
-        <div class="col-4 col-md-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{ inbox_form.method_notification|as_crispy_field }}
           </div>
         </div>
-        <div class="col-4 col-md-2">
+        <div class="col-4 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{ inbox_form.date_received|as_crispy_field }}
           </div>
         </div>
 
-        <div class="col-8 col-md-2">
+        <div class="col-8 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{ inbox_form.email_sent_date|as_crispy_field }}
           </div>
         </div>
-        <div class="col-8 col-md-2">
+        <div class="col-8 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{ inbox_form.valid|as_crispy_field }}
           </div>

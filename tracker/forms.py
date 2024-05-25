@@ -2,9 +2,7 @@ from django import forms
 from .models import Account,Address, Duplicates
 
 
-
 class DuplicatesForm(forms.ModelForm):
-    
     class Meta:
         model = Duplicates
         fields = ["duplicate_note",]
