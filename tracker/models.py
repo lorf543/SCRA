@@ -67,10 +67,15 @@ class Account(models.Model):
     #_________________________________Pending_info______________________
     pending = models.CharField(max_length=50,choices=PENDING,null=True, blank=True)
     reason = models.CharField(max_length=50,null=True, blank=True)
-    resolve_note = models.TextField(null=True, blank=True)
-    resolve_date = models.DateField(null=True, blank=True)
+    
+    pending_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='pending_add', null=True, blank = True)
     pending_date = models.DateField(null=True, blank=True)
     pending_note = models.TextField(null=True, blank=True)
+
+    resolve_note = models.TextField(null=True, blank=True)
+    resolve_date = models.DateField(null=True, blank=True)
+    resolve_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='resolve_add', null=True, blank = True)
+    
 
     class Meta:
         verbose_name = 'Customer'

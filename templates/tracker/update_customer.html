@@ -82,64 +82,119 @@
           </div>
         </div>
       </div>
-      <hr />
-      <h2 class="py-1">Denial Date</h2>
-      <div class="row mb-4">
-        <div class="col-6">
-          <div data-mdb-input-init class="form-outline">
-            {{customer_form.danial_date|as_crispy_field}}
-          </div>
-        </div>
-        <div class="col-6">
-          <div data-mdb-input-init class="form-outline mt-4">
-            {{customer_form.veteran|as_crispy_field}}
-          </div>
-        </div>
-      </div>
+        <hr />
 
-      <hr />
-      <h2 class="py-1">Approval Information</h2>
-      {% if customer.qualify == True %}
+        <h2 class="py-1">Denial Date</h2>
 
-      <div class="row mb-4">
-        <div class="col-5 col-md-2">
-          <div data-mdb-input-init class="form-outline">
-            {{customer_form.amount_refund|as_crispy_field}}
-          </div>
-        </div>
-        <div class="col-5 col-md-2">
-          <div data-mdb-input-init class="form-outline">
-            {{customer_form.the_way_refund|as_crispy_field}}
-          </div>
-        </div>
-        <div class="col-6 col-md-2">
-          <div data-mdb-input-init class="form-outline">
-            {{customer_form.date_refund|as_crispy_field}}
-          </div>
-        </div>
-      </div>
+        <div class="row">
 
-      <div class="row mb-4">
-        <div class="col-4">
-          <div data-mdb-input-init class="form-outline">
-            {{customer_form.where_fees|as_crispy_field}}
-          </div>
-        </div>
-        <div class="col-4">
-          <div data-mdb-input-init class="form-outline">
-            {{customer_form.Interest_Rate|as_crispy_field}}
-          </div>
-        </div>
-        <div class="col-4">
-          <div data-mdb-input-init class="form-outline">
-            {{customer_form.Fees|as_crispy_field}}
-          </div>
-        </div>
-      </div>
+            <div class="col-4">
+              <div data-mdb-input-init class="form-outline">
+                {{customer_form.danial_date|as_crispy_field}}
+              </div>
+            </div>
 
-      {% endif %}
-      <!-- Submit button -->
-      <div>
+            <div class="col-4">
+              <div data-mdb-input-init class="form-outline">
+                {{customer_form.denial_note|as_crispy_field}}
+              </div>
+            </div>
+
+          </div>
+
+        <div class="row">
+
+          <div class="col-3">
+            <div data-mdb-input-init class="form-outline mt-4">
+              <input type="checkbox" class="form-check-input" name="peding" id="pendingBox">
+              <label for="peding">Marck as peding?</label>
+            </div>
+          </div>
+
+          <div class="col-3">
+            <div data-mdb-input-init class="form-outline mt-4">
+              {{customer_form.veteran|as_crispy_field}}
+            </div>
+          </div>
+
+            <div class="pendingShow" id="pendingInfo">
+                <hr>
+                <h2 class="">Pending Date</h2>
+                  <div class="row">
+                    <div class="col-3 ">
+                      <div data-mdb-input-init class="form-outline mt-4">
+                        {{customer_form.reason|as_crispy_field}}
+                      </div>
+                    </div>
+                    <div class="col-3 ">
+                      <div data-mdb-input-init class="form-outline mt-4">
+                        {{customer_form.pending|as_crispy_field}}
+                      </div>
+                    </div>
+                    <div class="col-4">
+                      <div data-mdb-input-init class="form-outline mt-4">
+                        {{customer_form.pending_note|as_crispy_field}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-3 ">
+                      <div data-mdb-input-init class="form-outline mt-4">
+                        {{customer_form.resolve_note|as_crispy_field}}
+                      </div>
+                    </div>
+                    <div class="col-3 ">
+                      <div data-mdb-input-init class="form-outline mt-4">
+                        {{customer_form.resolve_date|as_crispy_field}}
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+            </div>
+
+          {% if customer.qualify == True %}
+            <hr />
+            <h2 class="py-1">Approval Information</h2>
+
+            <div class="row mb-4">
+              <div class="col-5 col-md-2">
+                <div data-mdb-input-init class="form-outline">
+                  {{customer_form.amount_refund|as_crispy_field}}
+                </div>
+              </div>
+              <div class="col-5 col-md-2">
+                <div data-mdb-input-init class="form-outline">
+                  {{customer_form.the_way_refund|as_crispy_field}}
+                </div>
+              </div>
+              <div class="col-6 col-md-2">
+                <div data-mdb-input-init class="form-outline">
+                  {{customer_form.date_refund|as_crispy_field}}
+                </div>
+              </div>
+            </div>
+
+            <div class="row mb-4">
+              <div class="col-4">
+                <div data-mdb-input-init class="form-outline">
+                  {{customer_form.where_fees|as_crispy_field}}
+                </div>
+              </div>
+              <div class="col-4">
+                <div data-mdb-input-init class="form-outline">
+                  {{customer_form.Interest_Rate|as_crispy_field}}
+                </div>
+              </div>
+              <div class="col-4">
+                <div data-mdb-input-init class="form-outline">
+                  {{customer_form.Fees|as_crispy_field}}
+                </div>
+              </div>
+            </div>
+
+          {% endif %}
+
         <button class="btn btn-success m-3" type="submit">Submit form</button>
       </div>
     </form>
@@ -148,14 +203,20 @@
 
 
 <script>
-  document.addEventListener('DOMContentLoaded',function(){
-    let veteran = document.querySelector('#id_veteran');
   
-    veteran.addEventListener('click',function() {
-      console.log('test');
-    });
-  })
-
+  const pendingBox = document.getElementById('pendingBox');
+  const pendingDate = document.getElementById('pendingInfo');
+  
+  pendingBox.addEventListener('click', () => {
+    if (pendingBox.checked) {
+      // Si el checkbox está marcado, oculta la sección
+      pendingDate.classList.remove('pendingShow');
+    } else {
+      // Si el checkbox no está marcado, muestra la sección nuevamente
+      pendingDate.classList.add('pendingShow'); // O 'inline', según el tipo de elemento
+    };
+  
+  });
 </script>
 
 {% endblock content %}

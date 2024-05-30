@@ -29,6 +29,10 @@ fieldset legend {
   border-radius: 5px;
 }
 
+.pendingShow{
+  display: none;
+}
+
 #scraList  thead{
   display: none;
 }

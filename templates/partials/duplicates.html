@@ -12,21 +12,18 @@
   </div>
 
   <div class="table-responsive">
-      <table
-      style="width: 100%"
-      class="table table-hover align-middle"
-      >
+    <table style="width: 100%" class="table table-hover align-middle">
       <thead>
-          <tr>
-              <th>#</th>
-              <th>Note</th>
-              <th>Created</th>
-              <th>User</th>
-              <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-          {% for duplicate in customer.customer_Duplicates.all %}
+        <tr>
+          <th>#</th>
+          <th>Note</th>
+          <th>Created</th>
+          <th>User</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for duplicate in customer.customer_Duplicates.all %}
         <tr>
           <td scope="row">{{ forloop.counter }}</td>
           <td>{{duplicate.duplicate_note}}</td>
@@ -36,17 +33,14 @@
             <div class="btn-group">
               <a
                 href="{% url 'update_duplicate' customer_id=customer.id duplicate_id=duplicate.id  %}"
-                class="btn btn-success d-flex justify-content-center"
-              >
+                class="btn btn-success d-flex justify-content-center">
                 <i class="fa-solid fa-pen-to-square"></i>
               </a>
-            <a
+              <a
                 href="{% url 'delete_duplicate' customer.id duplicate.id %}"
-                class="btn btn-danger d-flex justify-content-center"
-              >
-              <i class="fa-regular fa-square-minus"></i>
-            </a>
-
+                class="btn btn-danger d-flex justify-content-center">
+                <i class="fa-regular fa-square-minus"></i>
+              </a>
             </div>
           </td>
         </tr>
@@ -54,6 +48,4 @@
       </tbody>
     </table>
   </div>
-
 </div>
-

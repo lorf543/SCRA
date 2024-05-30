@@ -16,7 +16,7 @@ class CustomerAdmind(admin.ModelAdmin):
 
         ("Second information latter",{"fields":("second_review","danial_date","denial_note","date_alert_dl",)}),
 
-        ("Pending Information",{"fields":(("pending","reason",),"pending_note","resolve_note","resolve_date",)})
+        ("Pending Information",{"fields":(("pending","reason",),"pending_note","resolve_note",("resolve_date","pending_date"))})
 ]
 admin.site.register(Account,CustomerAdmind)
 

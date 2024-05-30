@@ -25,7 +25,7 @@ urlpatterns = [
     path('duplicates/delete/<int:customer_id>/<int:duplicate_id>/',views.delete_duplicate, name='delete_duplicate'),
 
     #pending
-    #path('pending/list/',views.list_pending, name='list_pending'),
+    path('pending/list/',views.list_pending, name='list_pending'),
 
     path('export/',views.export_data, name='export_data'),
 ]

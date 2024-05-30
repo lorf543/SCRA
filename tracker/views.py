@@ -120,6 +120,10 @@ def update_customer(request,customer_id):
         if customer_form.is_valid():
             customer = customer_form.save(commit=False)
             customer.updated_by = request.user
+            if customer.pending:
+                customer.pending_by = request.user
+                customer.pending_date = timezone.now().date()
+                print(f'customer has been set to pending by {request.user}' )
             customer.updated = timezone.now().date()
             dl_note(customer,request)
             customer.save()
@@ -241,7 +245,7 @@ def add_duplicate(request,customer_id):
             duplicates.customer = customer
             duplicates.added_by = request.user
             duplicates.save()
-            return redirect('detail_customer', customer.id)
+                
     else:
         form_duplicates = DuplicatesForm()
 
@@ -287,3 +291,9 @@ def delete_duplicate(request,customer_id,duplicate_id):
     return render(request,'duplicates/delete_duplicate.html',context)
 
 #________________________Pending__________________
+
+def list_pending(request):
+    customers = Account.objects.all()
+
+    context = {'customers':customers}
+    return render(request,'pending/pending_list.html',context)

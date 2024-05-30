@@ -37,11 +37,11 @@
           <td>{{inbox.email_sent_date|date:"m/d/Y"}}</td>
           <td>
             <div class="btn-group">
-                <a href="#" class="btn btn-secondary d-flex justify-content-center">
-                    <i class="lni lni-eye"></i>
+                <a href="{% url 'update_inbox' customer_id=customer.id inbox_id=inbox.id %}" class="btn btn-success d-flex justify-content-center">
+                  <i class="fa-solid fa-pen-to-square"></i>
                 </a>
-                <a href="{% url 'update_inbox' customer_id=customer.id inbox_id=inbox.id %}" class="btn btn-secondary d-flex justify-content-center">
-                  <i class="lni lni-pencil"></i>
+                <a href="{% url 'update_inbox' customer_id=customer.id inbox_id=inbox.id %}"class="btn btn-danger d-flex justify-content-center">
+                  <i class="fa-regular fa-square-minus"></i>
                 </a>
             </div>
           </td>

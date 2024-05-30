@@ -1,5 +1,6 @@
 from django import forms
 from .models import Account,Address, Duplicates
+from .utility import PENDING
 
 
 class DuplicatesForm(forms.ModelForm):
@@ -16,6 +17,7 @@ class CustomerForm(forms.ModelForm):
 
 
     account_number = forms.CharField(
+        required=False,
         widget=forms.TextInput(attrs={
             'hx-post':'/check-customer/',
             'hx-swap':'outerhtml',
@@ -23,7 +25,12 @@ class CustomerForm(forms.ModelForm):
             'hx-target':'#customer_error'
         })
     )
-
+    acc_status = forms.CharField(
+        required=False,
+    )
+    method_notification = forms.CharField(
+        required=False,
+    )
     veteran = forms.BooleanField(
         required=False,
         widget=forms.CheckboxInput(
@@ -49,6 +56,8 @@ class CustomerForm(forms.ModelForm):
             'date_request': forms.DateInput(attrs={'type':'date',}),
             'danial_date': forms.DateInput(attrs={'type':'date',}),
             'date_refund': forms.DateInput(attrs={'type':'date',}),
+            'pending_date': forms.DateInput(attrs={'type':'date',}),
+            'resolve_date': forms.DateInput(attrs={'type':'date',}),
         }
         
         

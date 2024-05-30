@@ -61,13 +61,13 @@
             </div>
             <hr />
             <p class="card-text">{{note.note|truncatechars:170}}</p>
-            <a  href="{% url 'update_notes' note.id %}" class="btn btn-success">
-              Update
-            </a>
-            <button
-              type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+              <a  href="{% url 'update_notes' note.id %}" class="m-2 link-secondary link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">
+                Update
+              </a>
+            <a
+              type="button" class="m-2 link-danger link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover" data-bs-toggle="modal" data-bs-target="#deleteModal">
               Delete
-            </button>
+            </a>
           </div>
         </div>
       </div>
