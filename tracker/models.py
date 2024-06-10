@@ -3,6 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
+from django.utils import timezone
 
 
 from .utility import *
@@ -20,6 +21,7 @@ class Account(models.Model):
     loan_type = models.CharField(
         max_length=50, choices=LOAN_TYPE, blank=True, null=True)
     customer_name = models.CharField(max_length=50, blank=True, null=True)
+    customer_last_name = models.CharField(max_length=50, blank=True, null=True)
     open_state = models.CharField(
         max_length=50, choices=ESTADOS_UNIDOS, blank=True, null=True)
     acc_status = models.CharField(max_length=50, choices=ACCOUNT_STATUS)
@@ -31,11 +33,10 @@ class Account(models.Model):
         auto_now=False, auto_now_add=False, blank=True, null=True)
     military_date = models.DateField(
         auto_now=False, auto_now_add=False, blank=True, null=True)
-    qualify = models.BooleanField()
+    qualify = models.BooleanField(blank=True, null=True, default=False)
     status_notes = models.TextField(blank=True, null=True)
     veteran = models.BooleanField(default=False, blank=True, null=True)
 
-    
     #_____________________________More Info Letter_______________________________
     first_review = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name='first_review_candidates', blank=True, null=True)
@@ -58,9 +59,11 @@ class Account(models.Model):
     waive_interest = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     Interest_Rate = models.CharField(max_length=50, blank=True, null=True,default="N/A")
     Fees = models.CharField(max_length=50, blank=True, null=True,default="N/A")
+    approved_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='approved_by',null=True, blank = True)
+    approved_date = models.DateField(null=True, blank = True)
     
-    created = models.DateTimeField(auto_now_add=True, null=True, blank = True)
-    updated = models.DateTimeField(null=True, blank = True)
+    created = models.DateField(auto_now_add=True, null=True, blank = True)
+    updated = models.DateField(null=True, blank = True)
     added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='costumer_add', null=True, blank = True)
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='costumer_update',null=True, blank = True)
 
@@ -88,26 +91,26 @@ class Account(models.Model):
         return self.military_date.strftime('%m/%d/%Y')
     
     def save(self, *args, **kwargs):
-        self._state.adding
+        #self._state.adding
         
+        if self.military_date == None:
+            self.qualify = False
+            self.status_notes = f""" SCRA account review. we have check form military date N/A and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. account does not qualify for SCRA benefits. issuing a more information letter.
+                """
         # special states
-        if self.military_date and self.open_state == "Ohio":
+        elif self.military_date and self.open_state == "Ohio":
             self.qualify = True
-            
+            self.status_notes = f"SCRA account review Ohio account {self.military_date.strftime('%m/%d/%Y')} open account {self.date_open_acc.strftime('%m/%d/%Y')}"
+           
         elif self.military_date and self.open_state == "Pennsylvania":
             days_difference = (self.date_open_acc - self.military_date).days
             if days_difference < 30:
                 self.qualify = True
-        
-        elif self.military_date:
-            self.status_notes = f""" SCRA account review. we have check form military date {self.military_date.strftime('%m/%d/%Y')}. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. account does not qualify for SCRA benefits. issuing a more information letter.
-                """
-            if self.military_date >= self.date_open_acc:
-                self.qualify = True
-        else:
-            self.status_notes =  f"""SCRA account review. we have check form military date N/A. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. account does not qualify for SCRA benefits. issuing a more information letter.
-                """
-            self.qualify = False
+                self.status_notes = f"SCRA account review Pennsylvania account {self.military_date.strftime('%m/%d/%Y')} open account {self.date_open_acc.strftime('%m/%d/%Y')}"
+        else: 
+            self.military_date >= self.date_open_acc
+            self.qualify = True
+            self.status_notes =  f"""SCRA account review Approval note. we have check form military date {self.military_date.strftime('%m/%d/%Y')}. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. Account qualify for SCRA benefits. issuing a Approval letter."""
             
         super(Account, self).save(*args, **kwargs)  
     
@@ -160,4 +163,3 @@ class Duplicates(models.Model):
     class meta:
         verbose_name_plural = 'Duplicates'
         ordering = ['created']
-    

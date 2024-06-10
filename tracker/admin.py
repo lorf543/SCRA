@@ -8,9 +8,9 @@ from .models import Account,Address,Duplicates
 class CustomerAdmind(admin.ModelAdmin):
     fieldsets = [
         ("Loan info",{"fields":(("loan_type","account_number"),("customer_name","open_state"),("acc_status",
-        "date_request","method_notification",),"date_open_acc","military_date","status_notes","added_by")}),
+        "date_request","method_notification",),"date_open_acc","military_date","status_notes","added_by","veteran")}),
         
-        ("Approval info",{"fields":("qualify",("the_way_refund","where_fees"),("where_waived","waive_interest"),("Interest_Rate","Fees"),)}),
+        ("Approval info",{"fields":("qualify",("the_way_refund","where_fees"),("where_waived","waive_interest"),("Interest_Rate","Fees"), ("approved_date","approved_by"))}),
         
         ("More information latter",{"fields":("first_review","date_mil")}),
 

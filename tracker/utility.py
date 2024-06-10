@@ -1,3 +1,7 @@
+QUALIFY = (
+    ('approved','approved'),
+    ('not approved','not approved'),
+)
 
 ESTADOS_UNIDOS = (
     ("Alabama", "AL"),
@@ -37,7 +41,7 @@ ESTADOS_UNIDOS = (
     ("Ohio", "OH"),
     ("Oklahoma", "OK"),
     ("Oregón", "OR"),
-    ("Pensilvania", "PA"),
+    ("Pennsylvania", "PA"),
     ("Rhode Island", "RI"),
     ("Carolina del Sur", "SC"),
     ("Dakota del Sur", "SD"),

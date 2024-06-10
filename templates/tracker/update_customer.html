@@ -37,6 +37,11 @@
             {{customer_form.customer_name|as_crispy_field}}
           </div>
         </div>
+        <div class="col-12 col-md-4">
+          <div data-mdb-input-init class="form-outline">
+            {{customer_form.customer_last_name|as_crispy_field}}
+          </div>
+        </div>
         <div class="col-6 col-md-4">
           <div id="customer_error"></div>
           <div data-mdb-input-init class="form-outline">
@@ -103,58 +108,68 @@
           </div>
 
         <div class="row">
-
-          <div class="col-3">
-            <div data-mdb-input-init class="form-outline mt-4">
-              <input type="checkbox" class="form-check-input" name="peding" id="pendingBox">
-              <label for="peding">Marck as peding?</label>
-            </div>
-          </div>
-
           <div class="col-3">
             <div data-mdb-input-init class="form-outline mt-4">
               {{customer_form.veteran|as_crispy_field}}
             </div>
           </div>
 
-            <div class="pendingShow" id="pendingInfo">
-                <hr>
-                <h2 class="">Pending Date</h2>
-                  <div class="row">
-                    <div class="col-3 ">
-                      <div data-mdb-input-init class="form-outline mt-4">
-                        {{customer_form.reason|as_crispy_field}}
-                      </div>
-                    </div>
-                    <div class="col-3 ">
-                      <div data-mdb-input-init class="form-outline mt-4">
-                        {{customer_form.pending|as_crispy_field}}
-                      </div>
-                    </div>
-                    <div class="col-4">
-                      <div data-mdb-input-init class="form-outline mt-4">
-                        {{customer_form.pending_note|as_crispy_field}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-3 ">
-                      <div data-mdb-input-init class="form-outline mt-4">
-                        {{customer_form.resolve_note|as_crispy_field}}
-                      </div>
-                    </div>
-                    <div class="col-3 ">
-                      <div data-mdb-input-init class="form-outline mt-4">
-                        {{customer_form.resolve_date|as_crispy_field}}
-                      </div>
-                    </div>
-                  </div>
 
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Pending Account info
+                </button>
+              </h2>
+              <div id="flush-collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFlushExample">
+                <div class="" id="pendingInfo">
+                  <hr>
+                  <div class="col-3">
+                    <div data-mdb-input-init class="form-outline mt-4">
+                      {{customer_form.veteran|as_crispy_field}}
+                    </div>
+                  </div>
+                  <h2 class="">Pending Date</h2>
+                    <div class="row">
+                      <div class="col-3 ">
+                        <div data-mdb-input-init class="form-outline mt-4">
+                          {{customer_form.reason|as_crispy_field}}
+                        </div>
+                      </div>
+                      <div class="col-3 ">
+                        <div data-mdb-input-init class="form-outline mt-4">
+                          {{customer_form.pending|as_crispy_field}}
+                        </div>
+                      </div>
+                      <div class="col-4">
+                        <div data-mdb-input-init class="form-outline mt-4">
+                          {{customer_form.pending_note|as_crispy_field}}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-3 ">
+                        <div data-mdb-input-init class="form-outline mt-4">
+                          {{customer_form.resolve_note|as_crispy_field}}
+                        </div>
+                      </div>
+                      <div class="col-3 ">
+                        <div data-mdb-input-init class="form-outline mt-4">
+                          {{customer_form.resolve_date|as_crispy_field}}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-            </div>
+              </div>
+              
 
-          {% if customer.qualify == True %}
-            <hr />
+                            
+                            
+                            
+           {% if customer.qualify == True %}
             <h2 class="py-1">Approval Information</h2>
 
             <div class="row mb-4">
@@ -202,7 +217,7 @@
 </section>
 
 
-<script>
+{% comment %} <script>
   
   const pendingBox = document.getElementById('pendingBox');
   const pendingDate = document.getElementById('pendingInfo');
@@ -217,6 +232,10 @@
     };
   
   });
-</script>
+</script> {% endcomment %}
 
 {% endblock content %}
+
+
+
+

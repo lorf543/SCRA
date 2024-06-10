@@ -55,7 +55,7 @@
                    <div class="col-6">{{customer.the_way_refund}}</div>
                    <hr class="mt-2">
                    <div class="col-6 text-muted">Date Refund</div>
-                   <div class="col-6">{{customer.date_refund}}</div>
+                   <div class="col-6">{{customer.date_refund|date:"m/d/Y"}}</div>
                    <hr class="mt-2">
                    <div class="col-6 text-muted">Where fees?</div>
                    <div class="col-6">{{customer.where_fees}}</div>
@@ -77,11 +77,13 @@
          {% endif %}
      </div>
      <div class="">
-          <h5 class="fw-bold">{{customer.added_by}} - MIL</h5>
+          <h5 class="fw-bold">{% if customer.qualify %} Approval note {% else %}More information note {% endif %} </h5>
           <p>{{customer.status_notes}}</p>
-          <hr>
-          <h5 class="fw-bold">{{customer.denial_by}} - DL</h5>
-          <p>{{customer.denial_note}}</p>
+          {% if customer.danial_date %}
+            <hr>
+            <h5 class="fw-bold">{{customer.denial_by}} - DL</h5>
+            <p>{{customer.denial_note}}</p>
+          {% endif %}
      </div>
 
 

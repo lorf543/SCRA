@@ -19,20 +19,25 @@
   <div class="container p-3  border shadow bg-white rounded">
     <a
       class="d-flex mb-2 align-items-center justify-content-center btn btn-outline-secondary shadow btn-sm"
-      style="width: 18rem" href="{{request.META.HTTP_REFERER}}">
+      style="width: 18rem" href="/">
       <i class="h1 lni lni-arrow-left-circle"></i>
       <h3 class="px-3">Back to tracker</h3>
     </a>
 
     <h2 class="py-1">Add Customer</h2>
 
-    <form method="POST">
+    <form method="POST" autocomplete="off" novalidate>
       {% csrf_token %}
       <!-- 2 column grid layout with text inputs for the first and last names -->
       <div class="row mb-4">
         <div class="col-12 col-md-4">
           <div data-mdb-input-init class="form-outline">
             {{customer_form.customer_name|as_crispy_field}}
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div data-mdb-input-init class="form-outline">
+            {{customer_form.customer_last_name|as_crispy_field}}
           </div>
         </div>
         <div class="col-6 col-md-4">

@@ -1,8 +1,15 @@
 from django import forms
 from .models import Account,Address, Duplicates
-from .utility import PENDING
 
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+import re
 
+def accNumber (value):
+    patron = r'^[0-9/-]*$' 
+    if not re.match(patron, value):
+        raise forms.ValidationError('Only numbers allow')
+    
 class DuplicatesForm(forms.ModelForm):
     class Meta:
         model = Duplicates
@@ -11,13 +18,30 @@ class DuplicatesForm(forms.ModelForm):
 
 
 class CustomerForm(forms.ModelForm):
+
     status_notes = forms.CharField(
         required=False,
         widget=forms.Textarea(attrs={"rows":"5","cols": "15"}))
 
+    customer_name = forms.CharField(
+        required=True,
+        validators=[
+        RegexValidator('^[a-zA-ZÀ-ÿ\s]*$',
+        message='Only letters allow here')
+        ]
+    )
+
+    customer_last_name = forms.CharField(
+        required=True,
+        validators=[
+        RegexValidator('^[a-zA-ZÀ-ÿ\s]*$',
+        message='Only letters allow here')
+        ]
+    )
 
     account_number = forms.CharField(
-        required=False,
+        required=True,
+        validators=[accNumber],
         widget=forms.TextInput(attrs={
             'hx-post':'/check-customer/',
             'hx-swap':'outerhtml',
@@ -25,12 +49,7 @@ class CustomerForm(forms.ModelForm):
             'hx-target':'#customer_error'
         })
     )
-    acc_status = forms.CharField(
-        required=False,
-    )
-    method_notification = forms.CharField(
-        required=False,
-    )
+
     veteran = forms.BooleanField(
         required=False,
         widget=forms.CheckboxInput(
@@ -63,7 +82,12 @@ class CustomerForm(forms.ModelForm):
         
     def __init__(self, *args, **kwargs):
         super(CustomerForm, self).__init__(*args, **kwargs)
-        self.fields['account_number'].label = "Acc number"
+        #self.fields['account_number'].label = "Acc number"
+        self.fields['date_open_acc'].required = True
+        self.fields['date_request'].required = True
+        self.fields['date_request'].required = True
+        self.fields['open_state'].required = True
+        self.fields['loan_type'].required = True
  
       
 class AddressForm(forms.ModelForm):

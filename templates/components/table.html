@@ -75,7 +75,9 @@
       <td class="text-center">{{customer.where_fees}}</td>
       <td class="text-center">{{customer.where_waived}}</td>
       <td class="text-center">{{customer.waive_interest}}</td>
-      <td class="text-center">N/A</td>
+      <td class="text-center">
+        {% if customer.approved_by %} {{customer.approved_by}}{% endif %}
+      </td>
       <td class="text-center">{{customer.first_review|date:"m/d/Y"}}</td>
       <td class="text-center">{{customer.date_mil|date:"m/d/Y"}}</td>
       <td class="text-center bg-secondary">{{customer.date_alert_dl|date:"m/d/Y"}}</td>

@@ -49,7 +49,7 @@ def export_data(request):
 def home(request):
     #customer = get_list_or_404(Account)
     filter = CustomerFilters(
-        request.GET, queryset=Account.objects.all()
+        request.GET, queryset=Account.objects.all().order_by('-created')
     )
     context ={
     'customers':filter.qs,
@@ -69,9 +69,13 @@ def add_customer(request):
         customer_form = CustomerForm(request.POST)
         address_form = AddressForm(request.POST)
         
-        if  customer_form.is_valid() and address_form.is_valid():
+        if customer_form.is_valid() and address_form.is_valid():
             customer = customer_form.save(commit=False)
             customer.added_by = request.user
+            if customer.approved_date:
+                customer.approved_by = request.user
+                print(customer.approved_by)
+                print(customer.customer.approved_date)
             customer.save()
 
             address = address_form.save(commit=False)
@@ -110,29 +114,31 @@ def dl_note(customer,request):
                     """
 
 @login_required(login_url='login_user')
-def update_customer(request,customer_id):
+def update_customer(request, customer_id):
     customer = get_object_or_404(Account, id=customer_id)
 
     if request.method == 'POST':
-        customer_form = CustomerForm(request.POST,instance=customer)
+        customer_form = CustomerForm(request.POST, instance=customer)
         
-        #print(customer_form.errors)
         if customer_form.is_valid():
             customer = customer_form.save(commit=False)
             customer.updated_by = request.user
-            if customer.pending:
-                customer.pending_by = request.user
-                customer.pending_date = timezone.now().date()
-                print(f'customer has been set to pending by {request.user}' )
-            customer.updated = timezone.now().date()
-            dl_note(customer,request)
+            if customer.qualify == True:
+                customer.approved_by = request.user
+                customer.approved_date = timezone.now().date()
+            else:
+                customer.approved_by = None
+                customer.approved_date = None                
+
             customer.save()
-        return redirect('detail_customer',customer.id)
+            return redirect('detail_customer', customer.id)
     else:
         customer_form = CustomerForm(instance=customer)
             
-    context = {'customer_form' : customer_form,'customer':customer}
-    return render(request,'tracker/update_customer.html',context)
+    context = {'customer_form': customer_form, 'customer': customer}
+    return render(request, 'tracker/update_customer.html', context)
+
+    
 
 @login_required(login_url='login_user')
 def detail_customer(request, customer_id):
