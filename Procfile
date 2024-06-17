@@ -1,1 +1,1 @@
-web: python manage.py collectstatic && gunicorn --chdir SCRA 'SCRA.wsgi'
+web: python manage.py collectstatic && gunicorn --chdir SCRA 'SCRA.wsgi' 
