@@ -60,7 +60,6 @@ INSTALLED_APPS = [
     'tracker',
     'scranotes',
     'Scra_inbox',
-    'django_flatpickr',
     'django_filters',
     'import_export',
     'django_cleanup.apps.CleanupConfig',
