@@ -11,9 +11,15 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import environ
+
+
+env = environ.Env( DEBUG=(bool, False) )
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ.Env.read_env(BASE_DIR / '.env')
+#set casting. default value
 
 
 # Quick-start development settings - unsuitable for production
@@ -25,7 +31,7 @@ SECRET_KEY = 'django-insecure-l38d8qjl&asnyy!1u+r!c83i*)wjujm7#et+5=76intpqw5i^*
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -46,6 +52,7 @@ INSTALLED_APPS = [
     'django_flatpickr',
     'django_filters',
     'import_export',
+    'django_cleanup.apps.CleanupConfig',
 ]
 
 MIDDLEWARE = [
@@ -138,10 +145,9 @@ STATIC_URL = 'static/'
 
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
-STATICFILES_DIRS = [
-    BASE_DIR / 'static'
-]
+STATICFILES_DIRS = [ BASE_DIR / 'static']
+
+MEDIA_ROOT = BASE_DIR / 'staticfiles'
 
 
 # Default primary key field type
