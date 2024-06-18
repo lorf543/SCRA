@@ -23,7 +23,7 @@ env = environ.Env()
 environ.Env.read_env() 
 
 
-env = environ.Env( DEBUG=(bool, False) )
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,13 +38,11 @@ environ.Env.read_env(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-l38d8qjl&asnyy!1u+r!c83i*)wjujm7#et+5=76intpqw5i^*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+DEBUG = False
 
+ALLOWED_HOSTS = ['127.0.0.1','web-production-c041.up.railway.app']
 
-
-ALLOWED_HOSTS = '127.0.0.1','scra-production.up.railway.app'
-
-CSRF_TRUSTED_ORIGINS = ['http://*','https://scra-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['http://*','https://web-production-c041.up.railway.app']
 
 
 # Application definition
@@ -56,6 +54,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #'whitenoise.runserver_nostatic'
     'crispy_forms',
     'crispy_bootstrap5',
     'Auth',
@@ -65,11 +64,17 @@ INSTALLED_APPS = [
     'django_filters',
     'import_export',
     'django_cleanup.apps.CleanupConfig',
+    'corsheaders'
 ]
+
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    #'whitenoise.middleware.WhiteNoiseMiddleware'
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -161,7 +166,12 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 
+#STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
