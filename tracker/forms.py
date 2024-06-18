@@ -66,7 +66,8 @@ class CustomerForm(forms.ModelForm):
                     'method_notification','date_open_acc','military_date',
                     'veteran','pending','reason','pending_by','pending_date',
                     'danial_date','denial_note','pending_note','resolve_note',
-                    'resolve_date'
+                    'resolve_date','amount_refund','the_way_refund','date_refund',
+                    'where_fees','Interest_Rate','Fees'
                 ]
         
         labels = {
