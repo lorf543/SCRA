@@ -44,9 +44,6 @@ DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = '127.0.0.1','scra-production.up.railway.app'
 
-envs = os.environ.get('ALLOWED_HOSTS').split(',')
-print(envs)
-
 CSRF_TRUSTED_ORIGINS = ['http://*','https://scra-production.up.railway.app']
 
 
