@@ -38,11 +38,13 @@ environ.Env.read_env(BASE_DIR / '.env')
 SECRET_KEY = 'django-insecure-l38d8qjl&asnyy!1u+r!c83i*)wjujm7#et+5=76intpqw5i^*'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
-ALLOWED_HOSTS = ['127.0.0.1','web-production-c041.up.railway.app']
 
-CSRF_TRUSTED_ORIGINS = ['http://*','https://web-production-c041.up.railway.app']
+
+ALLOWED_HOSTS = ['127.0.0.1','scra.up.railway.app']
+
+CSRF_TRUSTED_ORIGINS = ['http://*','https://scra.up.railway.app']
 
 
 # Application definition
@@ -109,16 +111,16 @@ WSGI_APPLICATION = 'SCRA.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
-
 # DATABASES = {
-#     'default': dj_database_url.config(default=os.environ.get('DATA_BASE_URL'))
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
 # }
+
+DATABASES = {
+    'default': dj_database_url.config(default=os.environ.get('DATA_BASE_URL'))
+}
 
 
 # Password validation
