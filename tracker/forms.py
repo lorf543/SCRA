@@ -22,6 +22,7 @@ class CustomerForm(forms.ModelForm):
     status_notes = forms.CharField(
         required=False,
         widget=forms.Textarea(attrs={"rows":"5","cols": "15"}))
+    
 
     customer_name = forms.CharField(
         required=True,
@@ -60,7 +61,13 @@ class CustomerForm(forms.ModelForm):
     class Meta:
         model = Account
         
-        fields = "__all__"
+        fields = [ 'customer_name','customer_last_name','account_number','open_state',
+                    'loan_type','open_state','acc_status','date_request',
+                    'method_notification','date_open_acc','military_date',
+                    'veteran','pending','reason','pending_by','pending_date',
+                    'danial_date','denial_note','pending_note','resolve_note',
+                    'resolve_date'
+                ]
         
         labels = {
             'amount_refund':'Amount Refund',

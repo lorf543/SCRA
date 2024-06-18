@@ -95,22 +95,33 @@ class Account(models.Model):
         
         if self.military_date == None:
             self.qualify = False
+            self.approved_by = None
             self.status_notes = f""" SCRA account review. we have check form military date N/A and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. account does not qualify for SCRA benefits. issuing a more information letter.
                 """
         # special states
         elif self.military_date and self.open_state == "Ohio":
             self.qualify = True
+            self.approved_date = timezone.now().date()
             self.status_notes = f"SCRA account review Ohio account {self.military_date.strftime('%m/%d/%Y')} open account {self.date_open_acc.strftime('%m/%d/%Y')}"
            
         elif self.military_date and self.open_state == "Pennsylvania":
             days_difference = (self.date_open_acc - self.military_date).days
             if days_difference < 30:
                 self.qualify = True
+                self.approved_date = timezone.now().date()
                 self.status_notes = f"SCRA account review Pennsylvania account {self.military_date.strftime('%m/%d/%Y')} open account {self.date_open_acc.strftime('%m/%d/%Y')}"
-        else: 
-            self.military_date >= self.date_open_acc
+
+        elif self.military_date >= self.date_open_acc:
             self.qualify = True
+            self.approved_date = timezone.now().date()
             self.status_notes =  f"""SCRA account review Approval note. we have check form military date {self.military_date.strftime('%m/%d/%Y')}. and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. Account qualify for SCRA benefits. issuing a Approval letter."""
+
+        else:
+            self.qualify = False
+            self.approved_by = None
+            self.status_notes = f""" SCRA account review. we have check form military date N/A and the open account date {self.date_open_acc.strftime('%m/%d/%Y')}. account does not qualify for SCRA benefits. issuing a more information letter.
+                """
+        
             
         super(Account, self).save(*args, **kwargs)  
     

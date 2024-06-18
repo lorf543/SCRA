@@ -14,20 +14,22 @@ from .filters import CustomerFilters
 @login_required(login_url='login_user')
 def export_data(request):
     queryset = Account.objects.all()  # Customize this queryset as needed
-
     # Create a new Workbook
     wb = Workbook()
     ws = wb.active
 
     # Add headers
-    headers = [ 'customer_name','account_number','loan_type', 'open_state','acc_status','date_request','method_notification','date_open_acc','military_date','qualify','status_notes','first_review'
-        ]  # Customize headers as needed
+    headers = [ 'customer_name','account_number','loan_type', 'open_state','acc_status','date_request',
+    'method_notification','date_open_acc','military_date','qualify','status_notes','first_review'
+    ]  # Customize headers as needed
     ws.append(headers)
 
     # Add data rows
     for item in queryset:
-        data_row = [item.customer_name, item.account_number, item.loan_type, item.open_state, item.acc_status, item.date_request,item.method_notification,item.date_open_acc,item.military_date, item.qualify,item.status_notes,item.first_review
+        data_row = [item.customer_name, item.account_number, item.loan_type, item.open_state, item.acc_status, item.date_request,
+        item.method_notification,item.date_open_acc,item.military_date, item.qualify,item.status_notes,item.first_review
         ]  # Customize fields as needed
+        #print(item.first_review)
         ws.append(data_row)
 
     # Save the workbook to a BytesIO object
@@ -72,10 +74,9 @@ def add_customer(request):
         if customer_form.is_valid() and address_form.is_valid():
             customer = customer_form.save(commit=False)
             customer.added_by = request.user
-            if customer.approved_date:
+            customer.first_review = request.user
+            if customer.qualify:
                 customer.approved_by = request.user
-                print(customer.approved_by)
-                print(customer.customer.approved_date)
             customer.save()
 
             address = address_form.save(commit=False)
