@@ -1,86 +1,152 @@
-<div id="layoutSidenav_nav">
-    <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
-        <div class="sb-sidenav-menu">
-            <div class="nav">
-                <div class="sb-sidenav-menu-heading">Core</div>
-                <a class="nav-link" href="/">
-                    <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                    Dashboard
-                </a>
-                <div class="sb-sidenav-menu-heading">Notes</div>
-                <a class="nav-link" href="{% url 'list_notes'%}">
-                    <div class="sb-nav-link-icon"><i class="fa-solid fa-note-sticky"></i></div>
-                    Notes
-                </a>
-                <a class="nav-link" href="{% url 'list_inbox' %}">
-                    <div class="sb-nav-link-icon"><i class="fa-solid fa-envelope"></i></div>
-                    Inbox
-                </a>
-                <a class="nav-link" href="{% url 'address_list' %}">
-                    <div class="sb-nav-link-icon"><i class="fa-solid fa-retweet"></i></div>
-                    Return Tracker
-                </a>
-                <a class="nav-link" href="{% url 'list_pending' %}">
-                    <div class="sb-nav-link-icon"><i class="fa-solid fa-clock"></i></div>
-                    Pending
-                </a>
+<div class="sidebar">
+  <div class="menu-btn">
+    <i class="ph-bold ph-caret-left"></i>
+  </div>
+  <div class="head">
+    <div class="user-details">
+      <p class="h3">SCRA</p>
+      <p class="name">{{request.user}}</p>
+    </div>
+  </div>
+  <div class="nav">
+    <div class="menu">
+      <p class="title">Main</p>
+      <ul>
+        <li>
+          <a href="{% url 'home' %}">
+            <i class="icon ph-bold ph-house-simple"></i>
+            <span class="text">Dashboard</span>
+          </a>
+        </li>
+        <li class="">
+          <a href="{% url 'list_notes' %}">
+            <i class="icon ph-bold ph-file-text"></i>
+            <span class="text">Notes</span>
+          </a>
+        </li>
+        <li class="">
+          <a href="{% url 'list_notes' %}">
+            <i class="fs-4 ph ph-envelope-simple"></i>
+            <span class="text">Notes</span>
+          </a>
+        </li>
+        <li class="">
+          <a href="{% url 'address_list' %}">
+            <i class="fs-4 ph ph-address-book"></i>
+            <span class="text">Address List</span>
+          </a>
+        </li>
+        <li class="">
+          <a href="{% url 'list_pending' %}">
+            <i class="fs-4 ph ph-hourglass-high"></i>
+            <span class="text">Address List</span>
+          </a>
+        </li>
+        {% comment %} <li>
+          <a href="#">
+            <i class="icon ph-bold ph-user"></i>
+            <span class="text">Audience</span>
+            <i class="arrow ph-bold ph-caret-down"></i>
+          </a>
+          <ul class="sub-menu">
+            <li>
+              <a href="#">
+                <span class="text">Users</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="text">Subscribers</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon ph-bold ph-calendar-blank"></i>
+            <span class="text">Schedules</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="icon ph-bold ph-chart-bar"></i>
+            <span class="text">Income</span>
+            <i class="arrow ph-bold ph-caret-down"></i>
+          </a>
+          <ul class="sub-menu">
+            <li>
+              <a href="#">
+                <span class="text">Earnings</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="text">Funds</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="text">Declines</span>
+              </a>
+            </li>
+            <li>
+              <a href="#">
+                <span class="text">Payouts</span>
+              </a>
+            </li>
+          </ul>
+        </li> {% endcomment %}
+      </ul>
+    </div>
 
-                {% comment %} <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
-                    <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                    Layouts
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav">
-                        <a class="nav-link" href="layout-static.html">Static Navigation</a>
-                        <a class="nav-link" href="layout-sidenav-light.html">Light Sidenav</a>
-                    </nav>
-                </div>
-                <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
-                    <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                    Pages
-                    <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                </a>
-                <div class="collapse" id="collapsePages" aria-labelledby="headingTwo" data-bs-parent="#sidenavAccordion">
-                    <nav class="sb-sidenav-menu-nested nav accordion" id="sidenavAccordionPages">
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseAuth" aria-expanded="false" aria-controls="pagesCollapseAuth">
-                            Authentication
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="login.html">Login</a>
-                                <a class="nav-link" href="register.html">Register</a>
-                                <a class="nav-link" href="password.html">Forgot Password</a>
-                            </nav>
-                        </div>
-                        <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
-                            Error
-                            <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
-                        </a>
-                        <div class="collapse" id="pagesCollapseError" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
-                            <nav class="sb-sidenav-menu-nested nav">
-                                <a class="nav-link" href="401.html">401 Page</a>
-                                <a class="nav-link" href="404.html">404 Page</a>
-                                <a class="nav-link" href="500.html">500 Page</a>
-                            </nav>
-                        </div>
-                    </nav>
-                </div>
-                <div class="sb-sidenav-menu-heading">Addons</div>
-                <a class="nav-link" href="charts.html">
-                    <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                    Charts
-                </a>
-                <a class="nav-link" href="tables.html">
-                    <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                    Tables
-                </a> {% endcomment %}
-            </div>
-        </div>
-        <div class="sb-sidenav-footer">
-            <div class="small">Logged in as:</div>
-            <h5>{{request.user}}</h5>
-        </div>
-    </nav>
+    {% comment %} <div class="menu">
+      <p class="title">Settings</p>
+      <ul>
+        <li>
+          <a href="#">
+            <i class="icon ph-bold ph-gear"></i>
+            <span class="text">Settings</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+     {% endcomment %}
+  </div>
+  <div class="menu">
+    <p class="title">Account</p>
+    <ul>
+      {% comment %} <li>
+        <a href="#">
+          <i class="icon ph-bold ph-info"></i>
+          <span class="text">Help</span>
+        </a>
+      </li> {% endcomment %}
+      <li>
+        <a class="btn" data-bs-toggle="modal" data-bs-target="#logoutModal">
+          <i class="icon ph-bold ph-sign-out"></i>
+          <span class="text">Logout</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="logoutModal" tabindex="-1" aria-labelledby="logoutModallLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="logoutModallLabel">Modal title</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Are you sure you want to logut?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Yes!</button>
+      </div>
+    </div>
+  </div>
 </div>

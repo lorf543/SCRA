@@ -1,94 +1,40 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
+
 
 {% block content %}
-{% include "components/navbar.html" %}
-
-<div id="layoutSidenav">
-   
-{% include "components/sidebar.html" %}
-
-  <div id="layoutSidenav_content">
-
-    <div class="container py-2" style='position: absolute;'>
-        {% if messages %}
-          <div class="alert-container">
-            {% for message in messages %}
-              <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                <strong>{{ message }}</strong> 
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-              </div>
-            {% endfor %}
-          </div>
-        {% endif %}
+<div class="main-container">
+    <!-- Box information  -->
+    <div class="row pt-2">
+        <div class="col">
+            <div
+                class="row justify-content-center align-items-center gap-4"
+            >
+                <div class="col-3 newclaims-show rounded">
+                    <p class="fs-2">307.48k</p>
+                    <p>New Claims Month counter</p>
+                </div>
+                <div class="col-3 denials-show rounded">
+                    <p class="fs-2">307.48k</p>
+                    <p>Denial Month counter</p>
+                </div>
+                <div class="col-3 approvals-show rounded">
+                    <p class="fs-2">307.48k</p>
+                    <p>Aproval Month counter</p>
+                </div>
+            </div>
+            
+        </div>
     </div>
-      <main>
-          <div class="container-fluid">
-              <h1 class="mt-4">SCRA-Tracker</h1>
-
-              <ol class="breadcrumb mb-4">
-                  <li class="breadcrumb-item active">Dashboard</li>
-              </ol>
-              <!--Cards-->
-
-              {% comment %} <div class="row">
-                  <div class="col-xl-3 col-md-6">
-                      <div class="card bg-primary text-white mb-4">
-                          <div class="card-body">Primary Card</div>
-                          <div class="card-footer d-flex align-items-center justify-content-between">
-                              <a class="small text-white stretched-link" href="#">View Details</a>
-                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-3 col-md-6">
-                      <div class="card bg-warning text-white mb-4">
-                          <div class="card-body">Warning Card</div>
-                          <div class="card-footer d-flex align-items-center justify-content-between">
-                              <a class="small text-white stretched-link" href="#">View Details</a>
-                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-3 col-md-6">
-                      <div class="card bg-success text-white mb-4">
-                          <div class="card-body">Success Card</div>
-                          <div class="card-footer d-flex align-items-center justify-content-between">
-                              <a class="small text-white stretched-link" href="#">View Details</a>
-                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-xl-3 col-md-6">
-                      <div class="card bg-danger text-white mb-4">
-                          <div class="card-body">Danger Card</div>
-                          <div class="card-footer d-flex align-items-center justify-content-between">
-                              <a class="small text-white stretched-link" href="#">View Details</a>
-                              <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-                          </div>
-                      </div>
-                  </div>
-              </div> {% endcomment %}
-
-
-              <!--main table-->
-              <div class="d-block d-md-flex gap-1">
-                <div class="card col-10">
-                    <div class="row">
-                      <div class="card-body">
-                          {% include "components/table.html" %}
-                      </div>
-                    </div>
-                </div>
-                <div class="col-2 border rounded-2 filters">
-                    {% include "components/filters.html" %}
-                </div>
-              </div>
-          </div>
-      </main>
-
-    {% include "components/footer.html" %}
-  </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="table-width container-fluid">
+                {% include "components/table.html" %}
+            </div>
+        </div>
+    </div>
 </div>
 
-{% endblock content %}
 
+{% endblock content %}
+</div>
