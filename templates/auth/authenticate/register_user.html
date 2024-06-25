@@ -1,13 +1,17 @@
-{% extends 'base.html' %}
 {% load crispy_forms_tags %} 
+{% load static %}
+
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 
 
-{% block title %}Registration{% endblock title %}
+
+<title>Login</title>
 
 {% block content %}
         
-    <div class="container">
+    {% comment %} <div class="container">
         {% if messages %}
             {% for message in messages  %}
                 <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -16,7 +20,7 @@
                 </div>
             {% endfor %}
         {% endif %}
-    </div>
+    </div> {% endcomment %}
 
     <section class="vh-100 gradient-custom">
         <div class="container py-5 h-100">

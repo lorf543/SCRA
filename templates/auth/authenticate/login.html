@@ -1,15 +1,18 @@
-{% extends 'base.html' %}
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
 
 
 
 
-{% block title %}Login{% endblock title %}
+<title>Login</title>
 
 {% block content %}
   <section class="vh-100 gradient-custom">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="container">
+          {% comment %} <div class="container">
             {% if messages %}
               <div class="alert-container">
                 {% for message in messages %}
@@ -20,7 +23,7 @@
                 {% endfor %}
               </div>
             {% endif %}
-          </div>
+          </div> {% endcomment %}
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div  class="card shadow bg-dark text-white" style="border-radius: 1rem;">
             <div class="card-body p-5 text-center">

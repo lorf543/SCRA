@@ -27,8 +27,7 @@ def login_user(request):
             messages.success(
                 request, f'Welcome to work {user}')
             return redirect('home')
-            
-
+        
         else:
             messages.success(
                 request, 'There was an error Logging, try again.')
