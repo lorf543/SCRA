@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Historial de {{ note.note_title }}</title>
+</head>
+<body>
+    <h1>Historial de {{ note.note_title }}</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Tipo de Cambio</th>
+                <th>Título</th>
+                <th>Nota</th>
+                <th>Creado por</th>
+                <th>Actualizado por</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in history %}
+            <tr>
+                <td>{{ record.history_date }}</td>
+                <td>{{ record.history_type }}</td>
+                <td>{{ record.note_title }}</td>
+                <td>{{ record.note }}</td>
+                <td>{{ record.added_by }}</td>
+                <td>{{ record.updated_by }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

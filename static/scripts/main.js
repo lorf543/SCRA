@@ -2,24 +2,68 @@ new DataTable('#scraList', {
   "autoWidth": true,
   "scrollX": true,
   "scrollY": 600,
+  "columnDefs": [
+    { "width": "10%", "targets": 0 },
+    { "width": "5%", "targets": 1 },
+    { "width": "10%", "targets": 2 },
+    { "width": "20%", "targets": 3 },
+    { "width": "20%", "targets": 4 },
+    { "width": "5%", "targets": 5 },
+    { "width": "20%", "targets": 6 },
+  ]
 });
 
 new DataTable('#trackerReturn', {
   "autoWidth": true,
   "scrollX": true,
   "scrollY": 600,
+  "columnDefs": [
+      { "width": "1%", "targets": 0 },
+      { "width": "5%", "targets": 1 },
+      { "width": "10%", "targets": 2 },
+      { "width": "10%", "targets": 3 },
+      { "width": "20%", "targets": 4 },
+      { "width": "5%", "targets": 5 },
+      { "width": "20%", "targets": 6 },
+  ]
 });
 
 new DataTable('#tableInbox', {
   "autoWidth": true,
-  "scrollX": true,
   "scrollY": 600,
+  "columnDefs": [
+    { "width": "5%", "targets": 0 },
+    { "width": "5%", "targets": 1 },
+    { "width": "5%", "targets": 2 },
+    { "width": "5%", "targets": 3 },
+    { "width": "5%", "targets": 4 },
+]
 });
+
+
 new DataTable('#Pendinglist', {
   "autoWidth": true,
   "scrollX": true,
   "scrollY": 600,
+  "columnDefs": [
+    { "width": "1%", "targets": 0 },
+    { "width": "5%", "targets": 1 },
+    { "width": "10%", "targets": 2 },
+    { "width": "15%", "targets": 3 },
+    { "width": "10%", "targets": 4 },
+    { "width": "10%", "targets": 5 },
+    { "width": "5%", "targets": 6 },
+    { "width": "5%", "targets": 7 },
+    { "width": "15%", "targets": 8 },
+]
 });
+
+
+new DataTable('#all_history_notes',{
+  "autoWidth": true,
+  "scrollX": true,
+  "scrollY": 600,
+})
 
 // new flatpickr("#test_id", {});
 

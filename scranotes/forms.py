@@ -5,4 +5,4 @@ class NotesForm(forms.ModelForm):
     
     class Meta:
         model = Notes
-        fields = ['note_title','note',]
+        fields = "__all__"

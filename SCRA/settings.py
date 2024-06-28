@@ -61,10 +61,12 @@ INSTALLED_APPS = [
     'tracker',
     'scranotes',
     'Scra_inbox',
+    'history',
     'django_filters',
     'import_export',
     'django_cleanup.apps.CleanupConfig',
-    'corsheaders'
+    'corsheaders',
+    'simple_history',
 ]
 
 
@@ -80,6 +82,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'simple_history.middleware.HistoryRequestMiddleware',
 ]
 
 

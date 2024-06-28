@@ -39,19 +39,21 @@
         <li class="">
           <a href="{% url 'list_pending' %}">
             <i class="fs-4 ph ph-hourglass-high"></i>
-            <span class="text">Address List</span>
+            <span class="text">Pending List</span>
           </a>
         </li>
-        {% comment %} <li>
+
+        <li>
           <a href="#">
-            <i class="icon ph-bold ph-user"></i>
-            <span class="text">Audience</span>
+            <i class="fs-4 ph ph-clock-counter-clockwise"></i>
+            <span class="text">History</span>
             <i class="arrow ph-bold ph-caret-down"></i>
           </a>
           <ul class="sub-menu">
             <li>
-              <a href="#">
-                <span class="text">Users</span>
+              <a href="{% url 'all_history' %}">
+                <i class="icon ph-bold ph-file-text"></i>
+                <span class="text">History notes</span>
               </a>
             </li>
             <li>
@@ -61,7 +63,8 @@
             </li>
           </ul>
         </li>
-        <li>
+
+        {% comment %} <li>
           <a href="#">
             <i class="icon ph-bold ph-calendar-blank"></i>
             <span class="text">Schedules</span>
@@ -95,7 +98,7 @@
               </a>
             </li>
           </ul>
-        </li> {% endcomment %}
+        </li>  {% endcomment %}
       </ul>
     </div>
 

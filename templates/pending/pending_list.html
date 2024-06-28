@@ -8,15 +8,15 @@
         
     <div class="shadow p-2 mx-1 my-5 rounded-3 bg-light">
 
-      <table id="Pendinglist" style="width:150%;" class="table table-bordered text-center p-">
+      <table id="Pendinglist" class="table table-bordered text-center border overflow-auto">
         <h2 class="mx-1 my-1">Pending List</h2>
         <thead>
           <tr>
             <th>#</th>
-            <th>Customer name</th>
+            <th>Actions</th>
             <th>Account number</th>
-            <th>Pending Status</th>
-            <th>Estatus</th>
+            <th>Customer name</th>
+            <th>Status</th>
             <th>reason</th>
             <th>Pending Date</th>
             <th>Pending by</th>
@@ -31,8 +31,16 @@
               {% if customer.pending %}
                   <tr>
                       <td class="text-center">{{ forloop.counter }}</td>
-                      <td class="text-center">{{ customer.customer_name }}</td>
+                      <td class="text-center">
+                        <a
+                        class="btn btn-success"
+                        href="{% url 'detail_customer' customer.id %}"
+                      >
+                      <i class="ph ph-pencil"></i>
+                      </a>
+                      </td>
                       <td class="text-center">{{ customer.account_number }}</td>
+                      <td class="text-center">{{ customer.customer_name }}</td>
 
                       {% if customer.pending == 'pending' %}
                         <td class="bg-danger fs-4"><b>{{customer.pending}}</b></td>
@@ -40,7 +48,6 @@
                         <td class="bg-success fs-4"><b>{{customer.pending }}</b></td>
                       {% endif %}
 
-                      <td class="text-center"><a class="m-2 link-success link-offset-2" href="{% url 'detail_customer' customer.id %}">{{ customer.account_number }}</a></td>
                       <td class="text-center">{{ customer.reason}}</td>
                       <td class="text-center">{{ customer.pending_date|date:"m/d/Y"}}</td>
                       <td class="text-center">{{customer.pending_by}}</td>

@@ -26,6 +26,7 @@ urlpatterns = [
     path('',include('tracker.urls')),
     path('scra-notes/',include('scranotes.urls')),
     path('scra-inbox/',include('Scra_inbox.urls')),
+    path('history/',include('history.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

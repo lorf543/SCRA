@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Historial de Todas las Notas</h1>
+
+<div class="container py-5 shadow p-2 rounded-3 bg-light ">
+    <table id="all_history_notes" class="table table-bordered text-center overflow-auto" >
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Changed</th>
+                <th>Title</th>
+                <th>Note</th>
+                <th>Created by</th>
+                <th>Update by</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in history %}
+            <tr>
+                <td>{{ record.history_date|date:"m/d/Y"}}</td>
+                <td>
+                    {% if record.history_type == '+' %}
+                        Created
+                    {% elif record.history_type == '~' %}
+                        Updated
+                    {% elif record.history_type == '-' %}
+                        Deleted
+                    {% endif %}
+                </td>
+                <td>{{ record.note_title }}</td>
+                <td>{{ record.note }}</td>
+                <td>{{ record.added_by }}</td>
+                <td>{{ record.updated_by }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    
+    </table>
+</div>
+
+
+
+{% endblock content %}

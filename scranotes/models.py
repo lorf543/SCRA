@@ -1,4 +1,5 @@
 from django.db import models
+from simple_history.models import HistoricalRecords
 from django.contrib.auth.models import User
 
 # Create your models here.
@@ -12,6 +13,7 @@ class Notes(models.Model):
     updated = models.DateTimeField(null=True, blank = True)
     added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='note_add', null=True, blank = True)
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='noter_update',null=True, blank = True)
+    history = HistoricalRecords()
 
 
     
