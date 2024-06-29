@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.utils import timezone
 
 from .models import Notes
 from .forms import NotesForm
@@ -17,6 +18,7 @@ def note_scra_list(request):
 @login_required(login_url='login_user')
 def note_scra_add(request):
     form = NotesForm()
+
     if request.method == 'POST':
         form = NotesForm(request.POST)
         if form.is_valid():
@@ -27,6 +29,7 @@ def note_scra_add(request):
                 request, 'New note has been added'
             )
             return redirect('list_notes')
+        
     context = {'form':form,}
     return render(request,'scranotes/add_notes.html',context)
 
@@ -38,6 +41,7 @@ def note_scra_update(request,note_id):
         form = NotesForm(request.POST,instance=note)
         if form.is_valid():
             note=form.save(commit=False)
+            note.updated = timezone.now().date()
             note.added_by = request.user
             note.save()
             messages.success(
@@ -47,6 +51,7 @@ def note_scra_update(request,note_id):
     else:
         form = NotesForm(instance=note)
     context = {'form':form,}
+    
     return render(request,'scranotes/update_notes.html',context)
 
 @login_required(login_url='login_user')

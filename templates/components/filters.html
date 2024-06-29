@@ -1,31 +1,27 @@
 {% load crispy_forms_tags %} 
-<h2 class='text-center'>Filters</h2>
-        <!-- Campo de búsqueda -->
+        {% comment %} <!-- Campo de búsqueda -->
         <div class="">
             <input type="text" id="filter-search" class="form-control" placeholder="Filter search...">
-        </div> 
+        </div>  {% endcomment %}
 <form action="" >
     {% csrf_token %}
-    <div style='white-space: nowrap;' id="search-results">
+    <div class="" id="search-results">
  
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.loan_type|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.open_state|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.acc_status|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.method_notification|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.date_request|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.date_open_acc|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.military_date|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.qualify|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.date_refund|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.date_mil|as_crispy_field}}</div>
-        <div style= 'width: 200px;' class="m-2 col-1">{{filter.form.danial_date|as_crispy_field}}</div>
-
-       
-
-        <div class="d-flex justify-content-center">
-            <button class='btn btn-success m-1' type="submit">Filter</button>
-            <a class="btn btn-danger m-1" href="{% url 'home' %}">Clear All Filters</a>
-        </div>
+        <div class="ms-5 col-6 ">{{filter.form.loan_type|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.open_state|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.acc_status|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.method_notification|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.date_request|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.date_open_acc|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.military_date|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.qualify|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.date_refund|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.date_mil|as_crispy_field}}</div>
+        <div class="ms-5 col-6 ">{{filter.form.danial_date|as_crispy_field}}</div>
+    </div>
+    <div class="d-flex">
+        <button class='btn btn-success m-1' type="submit">Filter</button>
+        <a class="btn btn-danger m-1" href="{% url 'home' %}">Clear All Filters</a>
     </div>
 </form>
 
