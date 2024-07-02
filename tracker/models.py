@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save, pre_save
 from django.dispatch import receiver
 from django.utils import timezone
+from simple_history.models import HistoricalRecords
 
 
 from .utility import *
@@ -78,7 +79,7 @@ class Account(models.Model):
     resolve_note = models.TextField(null=True, blank=True)
     resolve_date = models.DateField(null=True, blank=True)
     resolve_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='resolve_add', null=True, blank = True)
-    
+    history = HistoricalRecords()
 
     class Meta:
         verbose_name = 'Customer'
@@ -159,7 +160,7 @@ class Address(models.Model):
     updated = models.DateTimeField(null=True, blank = True)
     added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='address_add', null=True, blank = True)
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='address_update',null=True, blank = True)
-    
+    history = HistoricalRecords()
     
     class Meta:
         verbose_name = 'Customer Address'
@@ -177,7 +178,8 @@ class Duplicates(models.Model):
     updated = models.DateField(null=True, blank = True)
     added_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Duplicates_add', null=True, blank = True)
     updated_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='Duplicates_update',null=True, blank = True)
-
+    history = HistoricalRecords()
+    
     def __str__(self):
         return self.customer.customer_name
     

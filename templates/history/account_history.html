@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load custom_filters %}
+
+
+{% block content %}
+
+
+
+
+<h2>Account History</h2>
+{{last}}
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Account Number</th>
+            <th>Customer Name</th>
+            <th>History Date/Time</th>
+            <th>Fields Changed</th>
+            <th>History Action</th>
+            <th>History User</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for change in changes %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>{{ change.0.account_number }}</td>
+            <td>{{ change.0.customer_name }}</td>
+            <td>{{ change.0.history_date }}</td>
+            <td>
+                {% for field in change.1 %}
+                    {{ field }}<br>
+                {% endfor %}
+            </td>
+            <td>{{ change.0.get_history_type_display }}</td>
+            <td>{{ change.0.history_user }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+{% comment %} <ul>
+    {% for record in history_account %}
+        <li class="d-flex p-1">
+            <strong>{{ record.history_date }}</strong>
+            {% with record|changes as changed_fields %}
+                <ul class="d-flex px-4">
+                    <li class="px-4">{{record.account_number}}</li>
+                    <li class="px-4">{{record.updated_by}}</li>
+                    <li class="px-4">{{record.changes}}</li>
+                </ul>
+                {% if changed_fields %}
+
+                {% else %}
+                    <p>No changes</p>
+                {% endif %}
+            {% endwith %}
+        </li>
+    {% endfor %}
+</ul> {% endcomment %}
+
+{% comment %} <div class="container py-5 mt-5 shadow p-2 rounded-3 bg-light ">
+    <table id="all_history_notes" class="table table-bordered text-center overflow-auto" >
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Changed</th>
+                <th>Account number</th>
+                <th>Customer name</th>
+                <th>Created by</th>
+                <th>Update by</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in history_account %}
+            <tr>
+                <td>{{ record.history_date|date:"m/d/Y"}}</td>
+                <td>
+                    {% if record.history_type == '+' %}
+                        Created
+                    {% elif record.history_type == '~' %}
+                        Updated
+                    {% elif record.history_type == '-' %}
+                        Deleted
+                    {% endif %}
+                </td>
+                <td>{{ record.account_number }}</td>
+                <td>{{ record.customer_name }}</td>
+                <td>{{ record.created|date:"d/m/Y" }}</td>
+                <td>{{ record.updated_by }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    
+    </table>
+</div> {% endcomment %}
+
+
+
+{% endblock content %}

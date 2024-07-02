@@ -71,6 +71,10 @@
               <li class="nav-item" role="presentation">
                 <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#duplicates_list" role="tab">Duplicate list</a>
               </li>
+
+              <li class="nav-item" role="presentation">
+                <a class="nav-link" id="profile-tab" data-bs-toggle="tab" href="#history_list" role="tab">History</a>
+              </li>
               
               <li class="nav-item" role="presentation">
                 <div class="btn-group">
@@ -85,7 +89,6 @@
                 </div>
               </li>
 
-
             </ul>
             
            
@@ -98,6 +101,9 @@
               </div>
               <div class="tab-pane fade" id="email_list" role="tabpanel">
                 {% include "partials/email_list.html" %}
+              </div>
+              <div class="tab-pane fade" id="history_list" role="tabpanel">
+                {% include "history/account_history.html" %}
               </div>
               <div class="tab-pane fade" id="duplicates_list" role="tabpanel">
                 {% include "partials/duplicates.html" %}

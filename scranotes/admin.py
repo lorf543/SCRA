@@ -10,5 +10,5 @@ class NotesHistoryAdmin(SimpleHistoryAdmin):
     history_list_display = ['note_title']
     search_fields = ['note_title']
 
-admin.site.register(Notes,NotesHistoryAdmin)
+admin.site.register(Notes,SimpleHistoryAdmin)
 
